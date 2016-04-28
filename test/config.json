@@ -1,0 +1,41 @@
+{
+  "url": "http://localhost:3000",
+  "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidHlwZXMiOlsiQWRtaW4iXSwiaWF0IjoxNDQ4MDMwNDIxLCJleHAiOjE0NTA0NDk2MjF9.sW-9QhD1pLNsdm767Ll7HlZLH3iQCBt7v1IvdQb8ekw",
+  "newUserProfile": {
+    "email": "test@gmail.com",
+    "password": "test",
+    "firstName": "Austin",
+    "lastName": "Green",
+    "phone": "1234567890"
+  },
+  "newTillage": {
+    "name": "Test Tillage"
+  },
+  "newIrrigation": {
+    "name": "Test Irrigation"
+  },
+  "addInspector": {
+    "inspector_id": 1
+  },
+  "newCrop": {
+    "name": "Test Crop"
+  },
+  "newBoundary": {
+    "name": "Test Boundary",
+    "points":
+    [ [ 39.1899236539363, -96.59222602844238 ],
+      [ 39.18639781690845, -96.58737659454346 ],
+      [ 39.18317118841102, -96.5906810760498 ],
+      [ 39.18613170882218, -96.59523010253906 ] ]
+  },
+  "newField": {
+    "name": "Test Field",
+    "BoundaryId": "1",
+    "IrrigationId": "1",
+    "TillageId": "1",
+    "CropId": "1"
+  },
+  "newInspection":{
+    "FieldId": "1"
+  }
+}

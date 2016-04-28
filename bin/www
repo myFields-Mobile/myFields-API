@@ -1,0 +1,133 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+var app = require('../app');
+var debug = require('debug')('MyFields-API:server');
+var http = require('http');
+var models = require("../models");
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+
+/**
+ * Sequelize Model Migrations
+ */
+models.sequelize.sync().then(function () {
+  models.UserType.findAll()
+      .then(function(userTypes) {
+        if(userTypes.length == 0) {
+          models.UserType.create({title:'Admin'});
+          models.UserType.create({title:'Inspector'});
+          models.UserType.create({title:'Farmer'});
+        }
+      });
+
+  models.Crop.findAll()
+    .then(function(crops) {
+      console.log(crops);
+      if(crops.length == 0) {
+        models.Crop.create({name:'Wheat'});
+        models.Crop.create({name:'Cotton'});
+        models.Crop.create({name:'Corn'});
+      }
+    });
+
+  models.Irrigation.findAll()
+    .then(function(irrigations) {
+      if(irrigations.length == 0) {
+        models.Irrigation.create({name:'Irrigation 1'});
+        models.Irrigation.create({name:'Irrigation 2'});
+        models.Irrigation.create({name:'Irrigation 3'});
+      }
+    });
+
+  models.Tillage.findAll()
+    .then(function(tillages) {
+      if(tillages.length == 0) {
+        models.Tillage.create({name:'Tillage 1'});
+        models.Tillage.create({name:'Tillage 2'});
+        models.Tillage.create({name:'Tillage 3'});
+      }
+    });
+
+  /**
+   * Listen on provided port, on all network interfaces.
+   */
+  server.listen(server_port, server_ip_address);
+  server.on('error', onError);
+  server.on('listening', onListening);
+  console.log("Server started on port " + port);
+});
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

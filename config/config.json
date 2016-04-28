@@ -1,0 +1,19 @@
+{
+  "development": {
+    "dialect": "mysql",
+    "database": "myfields_dev",
+    "host": "localhost",
+    "username": "root",
+    "password": ""
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./db.test.sqlite"
+  },
+  "production": {
+    "database": "myfields",
+    "dialect": "mysql"
+  },
+  "secret": "superdupersecretgoeshere",
+  "saltWorkFactor": 10
+}
