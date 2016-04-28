@@ -11,8 +11,16 @@
     "storage": "./db.test.sqlite"
   },
   "production": {
-    "database": "myfields",
-    "dialect": "mysql"
+    "database": "MyFields-Mobile",
+    "dialect": "mysql",
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "idle": 10000
+    },
+    "dialectOptions": {
+      "encrypt": true
+    }
   },
   "secret": "superdupersecretgoeshere",
   "saltWorkFactor": 10

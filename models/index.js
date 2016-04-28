@@ -12,11 +12,14 @@ var db        = {};
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  if(process.env.OPENSHIFT_MYSQL_DB_HOST){
-    config.host = process.env.OPENSHIFT_MYSQL_DB_HOST;
-    config.port = process.env.OPENSHIFT_MYSQL_DB_PORT;
-    config.username = process.env.OPENSHIFT_MYSQL_DB_USERNAME;
-    config.password = process.env.OPENSHIFT_MYSQL_DB_PASSWORD;
+  if(process.env.MYSQLCONNSTR_defaultConnection){
+
+    var splitArray = process.env.MYSQLCONNSTR_defaultConnection.split
+
+    config.database = process.env.Database;
+    config.host = process.env.DataSource;
+    config.username = process.env.UserId;
+    config.password = process.env.Password;
 
     var sequelize = new Sequelize(config.database, config.username, config.password, config);
   } else if (process.argv.indexOf('test') != -1){
