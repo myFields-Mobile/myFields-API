@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MyFields Mobile API' });
+  res.render('index', { title: 'myFields Mobile API' });
 });
 
 module.exports = router;
