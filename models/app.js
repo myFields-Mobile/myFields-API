@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var AppModel = sequelize.define('AppModel', {
+    var App = sequelize.define('App', {
         name: { type: DataTypes.STRING, allowNull: false, unique: true },
         active: { type: DataTypes.BOOLEAN, defaultValue: true }
     }, {
@@ -12,5 +12,5 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return AppModel;
+    return App;
 };
