@@ -10,6 +10,8 @@ var cropRoutes = require('./Crop/crop');
 var fieldRoutes = require('./Field/field');
 var inspectionRoutes = require('./Inspection/inspection');
 var adminRoutes = require('./Admin/admin');
+var appmodelRoutes = require('./App/appmodel');
+var appdataRoutes = require('./AppData/appdata');
 
 /**
  * API Routes
@@ -23,6 +25,8 @@ router.use('/crop', cropRoutes);
 router.use('/field', fieldRoutes);
 router.use('/inspection', inspectionRoutes);
 router.use('/admin', adminRoutes);
+router.use('/appmodel', appmodelRoutes);
+router.use('/appdata', appdataRoutes);
 /**
  * End API Routes
  */
