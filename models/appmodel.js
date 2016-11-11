@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var Crop = sequelize.define('App', {
+    var AppModel = sequelize.define('AppModel', {
         name: { type: DataTypes.STRING, allowNull: false, unique: true },
         active: { type: DataTypes.BOOLEAN, defaultValue: true }
     }, {
@@ -12,5 +12,5 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    return App;
+    return AppModel;
 };

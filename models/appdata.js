@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-    var Crop = sequelize.define('AppData', {
+    var AppData = sequelize.define('AppData', {
         username: { type: DataTypes.STRING, allowNull: false },
         jsondata: { type: DataTypes.TEXT, allowNull: true },
         image: { type: DataTypes.BLOB, allowNull: true },
@@ -8,9 +8,10 @@ module.exports = function(sequelize, DataTypes) {
         active: { type: DataTypes.BOOLEAN, defaultValue: true }
     }, {
         classMethods: {
-            AppData.belongsTo(models.App);
-            
-        },
+            associate: function(models) {
+	        AppData.belongsTo(models.AppModel);
+            }
+      },
         instanceMethods: {
             toPublicJSON: function() {
             }

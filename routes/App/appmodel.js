@@ -5,7 +5,7 @@ var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAu
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
 
 router.get('/', function(req, res, next) {
-    models.App.findAll()
+    models.AppModel.findAll()
         .then(function (result) {
             res.send(result);
         })
