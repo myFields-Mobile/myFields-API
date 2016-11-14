@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
  *
  * @apiSuccess {String} message A success message.
  */
-router.delete('/remove', function(req, res){
+router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res){
 	// I am not sure about the 'entries' part
 	Entry.findById(req.params.id)
 		.exec(function(err, entries){
@@ -43,6 +43,17 @@ router.delete('/remove', function(req, res){
 				});
 			}
 		});
+});
+
+// Filter by user
+router.get('/filterByUser', isAuthenticated, isTypes(["Admin"]), function(req, res, next){
+	models.AppData.findAll({ userID: req.params.userID})
+	.then(function (result) {
+		res.send(result);
+        })
+        .error(function (err) {
+            res.status(500).send(err);
+        });
 });
 
 module.exports = router;
