@@ -33,7 +33,7 @@ router.delete('/remove', function(req, res){
 			else{
 				entries.remove(function(err){
 					if (err){
-						res.status.send(err);
+						res.status(403).send(err);
 					}
 					else{
 						res.send({
