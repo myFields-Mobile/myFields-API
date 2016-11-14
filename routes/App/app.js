@@ -14,7 +14,7 @@ var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
  * @apiSuccess {array} object App
  */
 router.get('/', function(req, res, next) {
-    models.AppModel.findAll()
+    models.App.findAll()
         .then(function (result) {
             res.send(result);
         })
