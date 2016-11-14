@@ -14,4 +14,35 @@ router.get('/', function(req, res, next) {
         });
 });
 
+/**
+ * @api {delete} api/user/reset-password Reset Password
+ * @apiName DeleteReport
+ * @apiGroup AppData
+ *
+ * @apiParam {String} id The id of the report in the table
+ *
+ * @apiSuccess {String} message A success message.
+ */
+router.delete('/remove', function(req, res){
+	Entry.findById(req.params.id)
+	// I am not sure about the 'entries' part
+		.exec(function(err, entries){
+			if(err || !entries){
+				res.status(400).send('Error: Could not delete report');
+			}
+			else{
+				entries.remove(function(err){
+					if (err){
+						res.status.send('Error: COuld not delete report');
+					}
+					else{
+						res.send({
+							message: 'Report has been successfully deleted.'
+						});
+					}
+				});
+			}
+		});
+});
+
 module.exports = router;
