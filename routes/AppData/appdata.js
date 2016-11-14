@@ -24,16 +24,16 @@ router.get('/', function(req, res, next) {
  * @apiSuccess {String} message A success message.
  */
 router.delete('/remove', function(req, res){
-	Entry.findById(req.params.id)
 	// I am not sure about the 'entries' part
+	Entry.findById(req.params.id)
 		.exec(function(err, entries){
 			if(err || !entries){
-				res.status(400).send('Error: Could not delete report');
+				res.status(400).send(err);
 			}
 			else{
 				entries.remove(function(err){
 					if (err){
-						res.status.send('Error: COuld not delete report');
+						res.status.send(err);
 					}
 					else{
 						res.send({
