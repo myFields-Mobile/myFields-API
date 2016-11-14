@@ -14,4 +14,8 @@ router.get('/', function(req, res, next) {
         });
 });
 
+router.remove('/delete', function(req, res, next){
+	var id = models.AppData.
+});
+
 module.exports = router;
