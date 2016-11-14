@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
         username: { type: DataTypes.STRING, allowNull: false },
         jsondata: { type: DataTypes.TEXT('long'), allowNull: true },
         image: { type: DataTypes.STRING, allowNull: true },
-        image: { type: DataTypes.GEOMETRY('POINT'), allowNull: true },
+        geo: { type: DataTypes.GEOMETRY('POINT'), allowNull: true },
         active: { type: DataTypes.BOOLEAN, defaultValue: true }
     }, {
         classMethods: {
