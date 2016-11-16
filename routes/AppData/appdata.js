@@ -11,9 +11,9 @@ var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
  *
  * @apiHeader {String} x-access-token Valid authentication JWT.
  *
- * @apiSuccess {array} object App Appdata
+ * @apiSuccess {array} object Entire AppData table
  */
-router.get('/', function(req, res, next) {
+router.get('/', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next) {
     models.AppData.findAll()
         .then(function (result) {
             res.send(result);
@@ -22,6 +22,25 @@ router.get('/', function(req, res, next) {
             res.status(500).send(err);
         });
 });
+
+/**
+ * @api {get} api/appdata/getJSON List
+ * @apiName List All AppData
+ * @apiGroup AppData
+ *
+ * @apiHeader {String} x-access-token Valid authentication JWT.
+ *
+ * @apiSuccess {array} object all JSON data from appdata table
+ */
+router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next)) {
+    models.AppData.findAll({where: {"select jsondata from models.AppData"}, raw: true})
+        .then(function (result) {
+            res.send(result);
+        })
+        .error(function(err) {
+            res.status(500).send(err);
+        });
+};
 
 /**
  * @api {post} api/appdata/create
@@ -65,7 +84,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
  */
 router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res){
 	// I am not sure about the 'entries' part
-	Entry.findById(req.params.id)
+	Entry.findById(req.body.id)
 		.exec(function(err, entries){
 			if(err || !entries){
 				res.status(400).send(err);
