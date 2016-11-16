@@ -85,9 +85,32 @@ router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), funct
 		});
 });
 
-// Filter by user
-router.get('/filterByUser', isAuthenticated, isTypes(["Admin"]), function(req, res, next){
-	models.AppData.findAll({ userID: req.params.userID})
+/**
+ * @api {get} api/filter/user Filter by User
+ * @apiName FilterByUser
+ * @apiGroup AppData
+ *
+ * @apiParam {String} userID The id of the user
+ */
+router.get('/filter/user', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
+	models.AppData.findAll({ userID: req.body.userID })
+	.then(function (result) {
+		res.send(result);
+        })
+        .error(function (err) {
+            res.status(500).send(err);
+        });
+});
+
+/**
+ * @api {get} api/filter/location Filter by location
+ * @apiName FilterByLocation
+ * @apiGroup AppData
+ *
+ * @apiParam {String} geoloc The location to filter by
+ */
+router.get('/filter/location', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
+	models.AppData.findAll({ geoloc: req.params.geoloc })
 	.then(function (result) {
 		res.send(result);
     })
