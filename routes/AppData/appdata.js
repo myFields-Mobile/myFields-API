@@ -32,15 +32,15 @@ router.get('/', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, 
  *
  * @apiSuccess {array} object all JSON data from appdata table
  */
-router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next)) {
-    models.AppData.findAll({where: {"select jsondata from models.AppData"}, raw: true})
+router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next) {
+    models.AppData.findAll({where: "select jsondata from models.AppData", raw: true})
         .then(function (result) {
             res.send(result);
         })
         .error(function(err) {
             res.status(500).send(err);
         });
-};
+});
 
 /**
  * @api {post} api/appdata/create
