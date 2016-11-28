@@ -87,12 +87,12 @@ router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), funct
 	Entry.findById(req.body.id)
 		.exec(function(err, entries){
 			if(err || !entries){
-				res.status(400).send(err);
+				res.status(500).send(err);
 			}
 			else{
 				entries.remove(function(err){
 					if (err){
-						res.status(403).send(err);
+						res.status(500).send(err);
 					}
 					else{
 						res.send({
@@ -109,7 +109,7 @@ router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), funct
  * @apiName FilterByUser
  * @apiGroup AppData
  *
- * @apiParam {String} userID The id of the user
+ * @apiParam {String} userID The id of the user to filter by
  */
 router.get('/filter/user', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
 	models.AppData.findAll({ userID: req.body.userID })
@@ -136,6 +136,34 @@ router.get('/filter/location', isAuthenticated, isTypes(["Admin", "Inspector"]),
     .error(function (err) {
         res.status(500).send(err);
     });
+});
+
+/**
+ * @api {get} api/filter/app Filter by app
+ * @apiName FilterByApp
+ * @apiGroup AppData
+ *
+ * @apiParam {String} app The App to filter by
+ */
+router.get('/filter/app', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
+	models.AppData.findAll({ app: req.body.app })
+	.then(function (result) {
+		res.send(result);
+	})
+	.err(function (err) {
+		res.status(500).send(err);
+	});
+});
+
+// Get images
+router.get('/get/images', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
+	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
+	.then(function (result){
+		//going to do something with the image urls here
+	})
+	.err(function (err) {
+		res.status(500).send(err);
+	});
 });
 
 module.exports = router;
