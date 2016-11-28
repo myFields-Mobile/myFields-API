@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router({mergeParams:true});
 
+/*
+Third party modules
+*/
+var azure = require('azure-storage');
+
+/*
+Our routes
+*/
 var authenticationRoutes = require('./Authentication/authentication');
 var userRoutes = require('./Users/users');
 var tillageRoutes = require('./Tillage/tillage');

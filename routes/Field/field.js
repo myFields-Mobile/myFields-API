@@ -24,7 +24,7 @@ router.post('/create',isAuthenticated,isTypes(['Farmer']), function(req, res, ne
         !req.body.IrrigationId ||
         !req.body.TillageId ||
         !req.body.CropId) {
-        res.status(500).send({ message: "Missing post parameters." })
+        res.status(400).send({ message: "Missing post parameters." })
     }
     else {
         models.Field.create({
