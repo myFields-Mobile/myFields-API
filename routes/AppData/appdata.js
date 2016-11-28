@@ -87,12 +87,12 @@ router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), funct
 	Entry.findById(req.body.id)
 		.exec(function(err, entries){
 			if(err || !entries){
-				res.status(400).send(err);
+				res.status(500).send(err);
 			}
 			else{
 				entries.remove(function(err){
 					if (err){
-						res.status(403).send(err);
+						res.status(500).send(err);
 					}
 					else{
 						res.send({
@@ -149,6 +149,17 @@ router.get('/filter/app', isAuthenticated, isTypes["Admin", "Inspector"], functi
 	models.AppData.findAll({ app: req.body.app })
 	.then(function (result) {
 		res.send(result);
+	})
+	.err(function (err) {
+		res.status(500).send(err);
+	});
+});
+
+// Get images
+router.get('/get/images', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
+	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
+	.then(function (result){
+		//going to do something with the image urls here
 	})
 	.err(function (err) {
 		res.status(500).send(err);
