@@ -137,7 +137,7 @@ router.get('/filter/user', isAuthenticated, isTypes(["Admin", "Inspector"]), fun
  * @apiParam {String} geoloc The location to filter by
  */
 router.get('/filter/location', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
-	models.AppData.findAll({ geoloc: req.params.geoloc })
+	models.AppData.findAll({ geoloc: req.body.geoloc })
 	.then(function (result) {
 		res.send(result);
     })
