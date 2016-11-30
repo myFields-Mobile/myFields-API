@@ -56,7 +56,7 @@ router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), functio
 router.post('/create', isAuthenticated, function(req, res, next) {
     if(!req.body.username) 
     {
-        req.status(500).send({message: "Missing username parameter."})
+        req.status(400).send({message: "Missing username parameter."})
     }
     else {
         var geolocation;
@@ -67,9 +67,17 @@ router.post('/create', isAuthenticated, function(req, res, next) {
             username: req.decoded,
             jsondata: req.body.jsondata,
             image: req.body.image,
-            geo: geolocation,
+            geoloc: geolocation,
             active: false
         })
+        if (err) {
+            res.status(500).send(err);
+        }
+        else {
+            res.status(200).send({
+                message: "Report created."
+            })
+        }
     }
 });
 
@@ -95,7 +103,7 @@ router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), funct
 						res.status(500).send(err);
 					}
 					else{
-						res.send({
+						res.status(200).send({
 							message: 'Report has been successfully deleted.'
 						});
 					}
