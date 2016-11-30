@@ -1,4 +1,4 @@
-/*
+
 var express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
