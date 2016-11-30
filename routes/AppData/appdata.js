@@ -74,7 +74,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
 });
 
 /*
- * @api {delete} api/user/reset-password Reset Password
+ * @api {delete} api/appdata/remove Remove an entry
  * @apiName DeleteReport
  * @apiGroup AppData
  *
