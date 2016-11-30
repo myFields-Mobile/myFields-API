@@ -1,5 +1,4 @@
-/*
-var express = require('express');
+const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
 var config = require('../../config/config');
@@ -66,7 +65,6 @@ module.exports = router;
 
 'use strict';
 
-const express = require('express');
 const simpleOauthModule = require('./../');
 
 const app = express();
