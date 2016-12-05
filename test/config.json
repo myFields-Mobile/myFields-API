@@ -37,5 +37,16 @@
   },
   "newInspection":{
     "FieldId": "1"
+  },
+  "newAppProfile": {
+    "name": "Test App",
+    "devInfo": "test info"
+  },
+  "newAppData":{
+    "username": "test",
+    "jsondata": "test",
+    "image": "",
+    "geoloc": [ 39.1899236539363, -96.59222602844238 ],
+    "active": false
   }
 }

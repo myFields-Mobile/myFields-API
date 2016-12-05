@@ -211,7 +211,7 @@ describe('Tillage', function() {
   });
 
   describe('Activate Tillage', function(done) {
-    it('should Activate given tillage', function(done) {
+    it('should activate given tillage', function(done) {
       tillageTest.activateTillage(done);
     });
   });
@@ -277,21 +277,12 @@ describe('Inspection', function() {
   });
 
   describe('List All Inspections', function(done) {
-    it('should list all inspectoins including the deactive ones', function(done) {
+    it('should list all inspections including the deactive ones', function(done) {
       inspectionTest.listDeactiveInspections(done);
     });
   });
 
-  /**
-   * Admin Tests
-   */
-
-  describe('Admin', function() {
-    before(function(done) {
-      done();
-  });
-
-  };
+});
 
    /**
    * App Tests
@@ -302,7 +293,25 @@ describe('Inspection', function() {
       done();
   });
 
-  };
+    describe('List All Apps', function(done){
+      it('should list all of the apps', function(done){
+        appTest.listAllApps(done);
+      });
+    });
+
+    describe('Create Invalid App', function(done){
+      it('should fail to create an app', function(done){
+        appTest.createInvalidApp(done);
+      });
+    });
+
+    describe('Create Valid App', function(done){
+      it('should succeed to create an app', function(done){
+        appTest.createValidApp(done);
+      });
+    });
+
+  });
 
    /**
    * AppData Tests
@@ -313,6 +322,64 @@ describe('Inspection', function() {
       done();
   });
 
-  };
+    describe('List All AppData', function(done){
+      it('should list all of the appdata information', function(done){
+        appDataTest.listAllAppData(done);
+      });
+    });
 
-});
+    describe('List All AppData JSON Information', function(done){
+      it('should list all of JSONs within AppData', function(done){
+        appDataTest.listAllAppDataJSON(done);
+      });
+    });
+
+    describe('Create Invalid AppData', function(done){
+      it('should fail to create an AppData entry', function(done){
+        appDataTest.createInvalidAppData(done);
+      });
+    });
+
+    describe('Create Valid AppData', function(done){
+      it('should successfully create an AppData entry', function(done){
+        appDataTest.createValidAppData(done);
+      });
+    });
+
+    describe('Remove AppData Fail', function(done){
+      it('should fail to remove an AppData entry', function(done){
+        appDataTest.removeAppDataFail(done);
+      });
+    });
+
+    describe('Remove AppData Success', function(done){
+      it('should successfully remove an AppData entry', function(done){
+        appDataTest.removeAppDataSuccess(done);
+      });
+    });
+
+    describe('Filter AppData by User', function(done){
+      it('should filter the app data by a specific user', function(done){
+        appDataTest.filterAppDataByUser(done);
+      });
+    });
+
+    describe('Filter AppData by Location', function(done){
+      it('should filter the app data by a specific location', function(done){
+        appDataTest.filterAppDataByLocation(done);
+      });
+    });
+
+    describe('Filter AppData by App', function(done){
+      it('should filter the app data by a specific app', function(done){
+        appDataTest.filterAppDataByApp(done);
+      });
+    });
+
+    describe('Get All Images', function(done){
+      it('should get all images within AppData', function(done){
+        appDataTest.getAllImages(done);
+      });
+    });
+
+  });
