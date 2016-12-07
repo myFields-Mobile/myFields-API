@@ -7,14 +7,14 @@ var app = require('../app');
 var debug = require('debug')('MyFields-API:server');
 var http = require('http');
 var models = require("../models");
-var server_port = process.env.PORT || 3000;
-var server_ip_address = '127.0.0.1';
+var server_port = process.env.PORT || 80;
+var server_ip_address = '104.236.245.142';
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
