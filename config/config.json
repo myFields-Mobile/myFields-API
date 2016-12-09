@@ -1,10 +1,10 @@
 {
   "development": {
     "dialect": "mysql",
-    "database": "myfields_dev",
+    "database": "testdb",
     "host": "localhost",
     "username": "root",
-    "password": ""
+    "password": "password"
   },
   "test": {
     "dialect": "sqlite",
