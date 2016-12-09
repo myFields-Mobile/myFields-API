@@ -6,6 +6,9 @@ var irrigationTest = require('./Irrigation/irrigation');
 var tillageTest = require('./Tillage/tillage');
 var fieldTest = require('./Field/field');
 var inspectionTest = require('./Inspection/inspection');
+var adminTest = require('./Admin/admin');
+var appTest = require('./App/app');
+var appDataTest = require('./AppData/appData');
 
 /**
  * User Tests
@@ -278,5 +281,38 @@ describe('Inspection', function() {
       inspectionTest.listDeactiveInspections(done);
     });
   });
+
+  /**
+   * Admin Tests
+   */
+
+  describe('Admin', function() {
+    before(function(done) {
+      done();
+  });
+
+  };
+
+   /**
+   * App Tests
+   */
+
+   describe('App', function() {
+    before(function(done) {
+      done();
+  });
+
+  };
+
+   /**
+   * AppData Tests
+   */
+
+   describe('AppData', function() {
+    before(function(done) {
+      done();
+  });
+
+  };
 
 });
