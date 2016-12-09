@@ -7,7 +7,9 @@ var jwt = config.jwt;
 var models  = require('../../models');
 var exports = module.exports = {};
 
-// TODO: test listing all app data
+/**
+ * Test listing all app data
+ */
 exports.listAllAppData = function(done){
 	request(url)
 		.get('api/appData')
@@ -22,7 +24,9 @@ exports.listAllAppData = function(done){
       });
 };
 
-// TODO: test getting all json data from app data
+/**
+ * Test getting all json data from app data
+ */
 exports.listAllAppDataJSON = function(done){
 	request(url)
 		.get('api/appData/getJSON')
@@ -37,7 +41,9 @@ exports.listAllAppDataJSON = function(done){
       });
 };
 
-// Test creating new invalid AppData
+/**
+ * Test creating new invalid AppData
+ */
 exports.createInvalidAppData = function(done){
 	var blankAppData = {
 	    jsondata: '',
@@ -59,7 +65,9 @@ exports.createInvalidAppData = function(done){
       });
 };
 
-// TODO: test creating new valid AppData
+/**
+ * Test creating new valid AppData
+ */
 exports.createValidAppData = function(done){
 	var testAppData = {
 		username: config.newAppData.username,
@@ -82,7 +90,9 @@ exports.createValidAppData = function(done){
       });
 };
 
-// Test removing an entry from AppData (that fails)
+/**
+ * Test removing an entry from AppData (that fails)
+ */
 exports.removeAppDataFail = function(done){
 	request(url)
 	.delete('api/appData/remove')
@@ -99,7 +109,9 @@ exports.removeAppDataFail = function(done){
 
 };
 
-// Test removing an entry from AppData (that succeeds)
+/**
+ * Test removing an entry from AppData (that succeeds)
+ */
 exports.removeAppDataSuccess = function(done){
 	// So need to figure out a good ID we can use for deletion purposes
 	var idToRemove = models.AppData.findAll({where: "select id from models.AppData where username = 'test'"}); // Help
@@ -118,9 +130,11 @@ exports.removeAppDataSuccess = function(done){
 		});
 };
 
-// TODO: test filtering by user
+/**
+ * Test filtering by user
+ */
 exports.filterAppDataByUser = function(done){
-	var user = {id: 1};
+	var user = {id: 1}; // I'm just assuming there's a user with id = 1.... May need to change
 	request(url)
 		.get('api/appData/filter/user')
 		.set('x-access-token', jwt)
@@ -135,9 +149,11 @@ exports.filterAppDataByUser = function(done){
       });
 };
 
-// TODO: test filtering by location
+/**
+ * Test filtering by location
+ */
 exports.filterAppDataByLocation = function(done){
-	var location = {geoloc: []}; // TBD
+	var location = config.newAppData.geoloc;
 	request(url)
 		.get('api/appData/filter/user')
 		.set('x-access-token', jwt)
@@ -152,7 +168,9 @@ exports.filterAppDataByLocation = function(done){
       });
 };
 
-// TODO: test filtering by app
+/**
+ * Test filtering by app
+ */
 exports.filterAppDataByApp = function(done){
 	var application = {app: ""}; // TBD
 	request(url)
@@ -169,7 +187,9 @@ exports.filterAppDataByApp = function(done){
       });
 };
 
-// TODO: test getting images
+/**
+ * Test getting images
+ */
 exports.getAllImages = function(done){
 	request(url)
 		.get('api/appData/filter/user')

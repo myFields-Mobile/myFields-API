@@ -6,7 +6,9 @@ var url = config.url;
 var jwt = config.jwt;
 var exports = module.exports = {};
 
-// Test listing all apps
+/**
+ * Test listing all apps
+ */
 exports.listAllApps = function(done){
 	request(url)
 		.get('api/app')
@@ -21,7 +23,9 @@ exports.listAllApps = function(done){
       });
 };
 
-// Test posting an invalid app
+/**
+ * Test posting an invalid app
+ */
 exports.createInvalidApp = function(done){
 	var blankApp = {
 		name: '',
@@ -41,7 +45,9 @@ exports.createInvalidApp = function(done){
         });
 };
 
-// Test posting a valid app
+/**
+ * Test posting a valid app
+ */
 exports.createValidApp = function(done){
 	var testApp = {
 		name: config.newAppProfile.name,
