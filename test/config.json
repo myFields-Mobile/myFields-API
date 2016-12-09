@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:3000",
+  "url": "http://104.236.245.142:80",
   "jwt": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwidHlwZXMiOlsiQWRtaW4iXSwiaWF0IjoxNDQ4MDMwNDIxLCJleHAiOjE0NTA0NDk2MjF9.sW-9QhD1pLNsdm767Ll7HlZLH3iQCBt7v1IvdQb8ekw",
   "newUserProfile": {
     "email": "test@gmail.com",

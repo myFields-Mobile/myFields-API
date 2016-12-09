@@ -1,71 +1,13 @@
+/*
 const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
 var config = require('../../config/config');
 var router = express.Router({mergeParams:true});
 
-/**
- * @api {post} api/authenticate Request authentication token.
- * @apiName Authenticate
- * @apiGroup Authentication
- *
- * @apiParam {String} email The users email address.
- * @apiParam {String} password The users password.
- *
- * @apiSuccess {String} message A welcome message to the api.
- * @apiSuccess {String} token The valid Json Web Token needed for authentication.
- *
-router.post('/', function(req, res, next) {
-  if(!req.body.email || !req.body.password) {
-    res.status(500).send({
-      "message": "No user with the following email found"
-    })
-  } else {
-    // Find first user with matching email
-    models.User.findOne({
-      where: {
-        email: req.body.email
-      },
-      include: [models.UserType]
-    }).then(function(matchingUser) {
-      if(!matchingUser) {
-        res.status(500).send({
-          "message": "No user with the following email found"
-        });
-      } else if(!matchingUser.validPassword(req.body.password)){
-        res.status(500).send({
-          "message": "Password is incorrect"
-        })
-      } else {
-
-        var userTypes = [];
-        matchingUser.UserTypes.forEach(function(userType) {
-          userTypes.push(userType.title);
-        });
-
-        var token = jwt.sign({
-          id: matchingUser.id,
-          types: userTypes
-        }, config.secret, {
-          expiresInMinutes: 40320 // expires in 24 hours
-        });
-
-        res.status(200).send({
-          message: "Authentication successful",
-          token: token,
-          user: matchingUser.toPublicJSON()
-        });
-      }
-    });
-  }
-});
-
-module.exports = router;
-*/
-
 'use strict';
 
-const simpleOauthModule = require('./../');
+const simpleOauthModule = require('simple-oauth2');
 
 const app = express();
 const oauth2 = simpleOauthModule.create({
@@ -82,9 +24,7 @@ const oauth2 = simpleOauthModule.create({
 
 // Authorization uri definition
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'http://localhost:3000/callback',
-  scope: 'notifications',
-  state: '3(#0/!~',
+  redirect_uri: 'oob'
 });
 
 // Initial page redirecting to Github
@@ -123,9 +63,70 @@ app.get('/', (req, res) => {
   res.send('Hello<br><a href="/auth">Log in with myFields</a>');
 });
 
-app.listen(3000, () => {
-  console.log('Express server started on port 3000'); // eslint-disable-line
+app.listen(80, () => {
+  console.log('Express server started on port 80'); // eslint-disable-line
 });
 
 
 // Credits to [@lazybean](https://github.com/lazybean)
+*/
+
+const express = require('express');
+var jwt    = require('jsonwebtoken');
+var models  = require('../../models');
+var config = require('../../config/config');
+var router = express.Router({mergeParams:true});
+
+/**
+ * @api {post} api/authenticate Request authentication token.
+ * @apiName Authenticate
+ * @apiGroup Authentication
+ *
+ * @apiParam {String} email The users email address.
+ * @apiParam {String} password The users password.
+ *
+ * @apiSuccess {String} message A welcome message to the api.
+ * @apiSuccess {String} token The valid Json Web Token needed for authentication.
+ */
+router.post('/', function(req, res, next) {
+  if(!req.body.email || !req.body.password) {
+    res.status(500).send({
+      "message": "No user with the following email found"
+    })
+  } else {
+    // Find first user with matching email
+    models.User.findOne({
+      where: {
+        email: req.body.email
+      },
+      include: [models.UserType]
+    }).then(function(matchingUser) {
+      if(!matchingUser) {
+        res.status(500).send({
+          "message": "No user with the following email found"
+        });
+      } else if(!matchingUser.validPassword(req.body.password)){
+        res.status(500).send({
+          "message": "Password is incorrect"
+        })
+      } else {
+        var userTypes = [];
+        matchingUser.UserTypes.forEach(function(userType) {
+          userTypes.push(userType.title);
+        });
+        var token = jwt.sign({
+          id: matchingUser.id,
+          types: userTypes
+        }, config.secret, {
+          expiresInMinutes: 40320 // expires in 24 hours
+        });
+        res.status(200).send({
+          message: "Authentication successful",
+          token: token,
+          user: matchingUser.toPublicJSON()
+        });
+      }
+    });
+  }
+});
+module.exports = router;
