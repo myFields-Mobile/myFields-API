@@ -1,6 +1,283 @@
 define({ "api": [
   {
     "type": "post",
+    "url": "api/app/add",
+    "title": "",
+    "name": "Add_App",
+    "group": "App",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the application</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "devInfo",
+            "description": "<p>The developer informtion for the app, including version</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/App/app.js",
+    "groupTitle": "App"
+  },
+  {
+    "type": "post",
+    "url": "api/appdata/create",
+    "title": "",
+    "name": "CreateAppData",
+    "group": "AppData",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "jsondata",
+            "description": "<p>The json string containing the data to submit (optional)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "image",
+            "description": "<p>The URL to the location where the image is stored (S3, Azure, etc)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Double",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>The GPS longitude (optional)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Double",
+            "optional": false,
+            "field": "lattitude",
+            "description": "<p>the GPS lattitude (optional)</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/filter/app",
+    "title": "Filter by app",
+    "name": "FilterByApp",
+    "group": "AppData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "app",
+            "description": "<p>The App to filter by</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/filter/location",
+    "title": "Filter by location",
+    "name": "FilterByLocation",
+    "group": "AppData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "geoloc",
+            "description": "<p>The location to filter by</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/filter/user",
+    "title": "Filter by User",
+    "name": "FilterByUser",
+    "group": "AppData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userID",
+            "description": "<p>The id of the user to filter by</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/appdata/",
+    "title": "List",
+    "name": "List_All_AppData",
+    "group": "AppData",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>Entire AppData table</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/appdata/getJSON",
+    "title": "List",
+    "name": "List_All_AppData",
+    "group": "AppData",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>all JSON data from appdata table</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/app/",
+    "title": "List",
+    "name": "List_All_App",
+    "group": "App",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>App</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/App/app.js",
+    "groupTitle": "App"
+  },
+  {
+    "type": "post",
     "url": "api/authenticate",
     "title": "Request authentication token.",
     "name": "Authenticate",
@@ -46,7 +323,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Authentication/authentication.js",
+    "filename": "myFields-API/routes/Authentication/authentication.js",
     "groupTitle": "Authentication"
   },
   {
@@ -69,7 +346,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/api.js",
+    "filename": "myFields-API/routes/api.js",
     "groupTitle": "Authentication"
   },
   {
@@ -125,7 +402,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Boundary/boundary.js",
+    "filename": "myFields-API/routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -161,7 +438,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Boundary/boundary.js",
+    "filename": "myFields-API/routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -197,7 +474,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Boundary/boundary.js",
+    "filename": "myFields-API/routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -246,10 +523,29 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Boundary/boundary.js",
+    "filename": "myFields-API/routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "varname1",
+            "description": "<p>No type.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "varname2",
+            "description": "<p>With type.</p>"
+          }
+        ]
+      }
+    },
     "type": "get",
     "url": "api/crop/",
     "title": "List",
@@ -282,7 +578,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Crop/crop.js",
+    "filename": "myFields-API/routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -318,7 +614,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Crop/crop.js",
+    "filename": "myFields-API/routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -354,7 +650,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Crop/crop.js",
+    "filename": "myFields-API/routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -390,7 +686,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -448,7 +744,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "crop_id",
-            "description": "<p>The ID of the associated crop.b</p>"
+            "description": "<p>The ID of the associated crop.</p>"
           }
         ]
       }
@@ -467,7 +763,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -503,7 +799,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -539,7 +835,43 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
+    "groupTitle": "Field"
+  },
+  {
+    "type": "get",
+    "url": "api/field/admin",
+    "title": "List",
+    "name": "ListAllActiveFields",
+    "group": "Field",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>Returns all active fields.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -575,7 +907,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -611,8 +943,147 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Field/field.js",
+    "filename": "myFields-API/routes/Field/field.js",
     "groupTitle": "Field"
+  },
+  {
+    "type": "post",
+    "url": "api/images/deleteBlob",
+    "title": "DeleteBlob",
+    "name": "DeleteBlob_Images",
+    "group": "Images",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "JWT",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "container",
+            "description": "<p>The name of the Azure Storage container (should be provided by app calling API)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "blob",
+            "description": "<p>The name of the blob to delete</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Images/images.js",
+    "groupTitle": "Images"
+  },
+  {
+    "type": "post",
+    "url": "api/images/downloadBlob",
+    "title": "DownloadBlob",
+    "name": "DownloadBlob_Images",
+    "group": "Images",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "JWT",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "container",
+            "description": "<p>The name of the Azure Storage container (should be provided by app calling API)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "blob",
+            "description": "<p>The name of the blob to download</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "output",
+            "description": "<p>File name to save blob to locally</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Images/images.js",
+    "groupTitle": "Images"
+  },
+  {
+    "type": "post",
+    "url": "api/images/listBlobs",
+    "title": "ListBlobs",
+    "name": "ListBlobs_Images",
+    "group": "Images",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "Token",
+            "description": "<p>for now... obviously not gonna work later</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "container",
+            "description": "<p>The name of the Azure Storage container (should be provided by app calling API)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>Array of blob descriptions</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Images/images.js",
+    "groupTitle": "Images"
   },
   {
     "type": "get",
@@ -647,7 +1118,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -683,7 +1154,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -719,7 +1190,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -755,7 +1226,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -791,13 +1262,13 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
     "type": "get",
-    "url": "api/inspection/me",
-    "title": "List all inspections for the user",
+    "url": "api/inspection/requested/all",
+    "title": "List all assigned inspections requested by the user",
     "name": "ListAllInspection",
     "group": "Inspection",
     "header": {
@@ -827,7 +1298,43 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "groupTitle": "Inspection"
+  },
+  {
+    "type": "get",
+    "url": "api/inspection/me",
+    "title": "List all assigned inspections for the user",
+    "name": "ListAllInspection",
+    "group": "Inspection",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>inspection types.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -863,13 +1370,13 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
     "type": "get",
-    "url": "api/inspection/",
-    "title": "List all active inspections for the user",
+    "url": "api/inspection/requested",
+    "title": "List all active inspections requested by the user",
     "name": "ListInspection",
     "group": "Inspection",
     "header": {
@@ -899,7 +1406,43 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "groupTitle": "Inspection"
+  },
+  {
+    "type": "get",
+    "url": "api/inspection",
+    "title": "List all active inspections",
+    "name": "ListInspection",
+    "group": "Inspection",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>inspection types.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -953,7 +1496,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Inspection/inspection.js",
+    "filename": "myFields-API/routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -989,7 +1532,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Irrigation/irrigation.js",
+    "filename": "myFields-API/routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -1025,7 +1568,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Irrigation/irrigation.js",
+    "filename": "myFields-API/routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -1061,7 +1604,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Irrigation/irrigation.js",
+    "filename": "myFields-API/routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -1097,7 +1640,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Tillage/tillage.js",
+    "filename": "myFields-API/routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -1133,7 +1676,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Tillage/tillage.js",
+    "filename": "myFields-API/routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -1169,7 +1712,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Tillage/tillage.js",
+    "filename": "myFields-API/routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -1233,7 +1776,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Users/users.js",
+    "filename": "myFields-API/routes/Users/users.js",
     "groupTitle": "User"
   },
   {
@@ -1269,7 +1812,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Users/users.js",
+    "filename": "myFields-API/routes/Users/users.js",
     "groupTitle": "User"
   },
   {
@@ -1319,7 +1862,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "routes/Users/users.js",
+    "filename": "myFields-API/routes/Users/users.js",
     "groupTitle": "User"
   }
 ] });
