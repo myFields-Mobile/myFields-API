@@ -2,7 +2,7 @@ var express = require('express');
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
-var multiparty = require('multiparty'),
+var busboy = require('busboy');
 var azure = require('azure');
 var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAuthenticated;
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
@@ -33,6 +33,7 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 					return;
 				}
 				else{
+					// TODO: make sure this just stores the blob data, not the entire blob
 					blobs += result.entries;
 					if(result.continuationToken)
 					{
@@ -64,7 +65,7 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']) fu
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	else {
-		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function, result, response){
+		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function(result, response){
 			// TODO: change this to stream from Azure to client device
 			if(error){
 				res.status(500).send({message: "Error downloading blob from Azure."});

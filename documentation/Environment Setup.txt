@@ -11,5 +11,5 @@ Node Modules:
 azure-storage
 simple-oauth2
 express
-multiparty
+busboy
 formidable
