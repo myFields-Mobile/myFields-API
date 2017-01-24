@@ -4,7 +4,6 @@ var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
 var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAuthenticated;
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
-
 var blobSvc = azure.createBlobService();
 
 /**
@@ -45,7 +44,7 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 		}
 		handleBlobs(req.body.container, null);
 	}
-})
+});
 
 /**
  * @api {post} api/images/downloadBlob DownloadBlob
@@ -57,23 +56,22 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
  * @apiParam {string} blob The name of the blob to download
  * @apiParam {string} output File name to save blob to locally
  */
-router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']) function(req, res, next) {
+router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), function(req, res, next) {
 	if(!req.body.container || !req.body.blob || !req.body.output){
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	else {
-		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function, result, response){
+		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function(result, response){
 			// TODO: change this to stream from Azure to client device
 			if(error){
 				res.status(500).send({message: "Error downloading blob from Azure."});
-				return;
 			}
 			else{
 				res.status(200).send({message: "Blob retrieved."});
 			}
-		}
+		});
 	}
-})
+});
 
 /**
  * @api {post} api/images/deleteBlob DeleteBlob
@@ -97,9 +95,9 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
 			else {
 				res.status(200).send({message: "Blob deleted."});
 			}
-		})
+		});
 	}
-})
+});
 
 router.post('/addBlob', isAuthenticated, function(req, res, next)
 {
@@ -107,4 +105,4 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	// TODO: finish this
-})
+});

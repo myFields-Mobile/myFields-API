@@ -51,7 +51,7 @@ router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), functio
  * @apiParam {String} jsondata The json string containing the data to submit (optional)
  * @apiParam {String} image The URL to the location where the image is stored (S3, Azure, etc)
  * @apiParam {Double} longitude The GPS longitude (optional)
- * @apiParam {Double} lattitude the GPS lattitude (optional)
+ * @apiParam {Double} latitude the GPS latitude (optional)
  */
 router.post('/create', isAuthenticated, function(req, res, next) {
     if(!req.body.username) 
@@ -60,8 +60,8 @@ router.post('/create', isAuthenticated, function(req, res, next) {
     }
     else {
         var geolocation;
-        if (req.body.longitude != 'undefined' && req.body.lattitude != 'undefined'){
-            geolocation = point(req.body.longitude, req.body.lattitude);
+        if (req.body.longitude != 'undefined' && req.body.latitude != 'undefined'){
+            geolocation = point(req.body.longitude, req.body.latitude);
         }
         models.AppData.create({
             username: req.decoded,
@@ -91,7 +91,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
  * @apiSuccess {String} message A success message.
  */
 router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res){
-	// I am not sure about the 'entries' part
+	// Unsure about the 'entries' part
 	Entry.findById(req.body.id)
 		.exec(function(err, entries){
 			if(err || !entries){
@@ -167,7 +167,7 @@ router.get('/filter/app', isAuthenticated, isTypes["Admin", "Inspector"], functi
 router.get('/get/images', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
 	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
 	.then(function (result){
-		//going to do something with the image urls here
+		// TODO: something with the image urls here
 	})
 	.err(function (err) {
 		res.status(500).send(err);
