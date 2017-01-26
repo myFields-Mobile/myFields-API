@@ -27,7 +27,7 @@ const authorizationUri = oauth2.authorizationCode.authorizeURL({
   redirect_uri: 'oob'
 });
 
-// Initial page redirecting to Github
+// Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
   console.log(authorizationUri);
   res.redirect(authorizationUri);
@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(80, () => {
-  console.log('Express server started on port 80'); // eslint-disable-line
+  console.log('Express server started on port 80');
 });
 
 

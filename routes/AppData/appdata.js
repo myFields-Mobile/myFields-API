@@ -11,7 +11,7 @@ var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
  *
  * @apiHeader {String} x-access-token Valid authentication JWT.
  *
- * @apiSuccess {array} object Entire AppData table
+ * @apiSuccess {Array} object Entire AppData table
  */
 router.get('/', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next) {
     models.AppData.findAll()
@@ -81,7 +81,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
     }
 });
 
-/*
+/**
  * @api {delete} api/appdata/remove Remove an entry
  * @apiName DeleteReport
  * @apiGroup AppData
