@@ -2,8 +2,8 @@ var express = require('express');
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
-var busboy = require('busboy');
 var azure = require('azure');
+var multiparty = require('multiparty');
 var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAuthenticated;
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
 
@@ -33,7 +33,6 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 					return;
 				}
 				else{
-					// TODO: make sure this just stores the blob data, not the entire blob
 					blobs += result.entries;
 					if(result.continuationToken)
 					{
@@ -104,10 +103,37 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
 	}
 })
 
+/**
+ * @api {post} api/images/addBlob addBlob
+ * @apiName addBlob Images
+ * @apiGroup Images
+ *
+ * @apiHeader JWT
+ * @apiParam {string} container The name of the Azure Storage container (should be provided by app calling API)
+ * @apiParam {string} filename The filename of the blob to add
+ */
 router.post('/addBlob', isAuthenticated, function(req, res, next)
 {
 	if(!req.body.container || !req.body.blob || !req.body.input){
 		res.status(500).send({message: "Missing post parameters."});
 	}
-	// TODO: finish this
-})
+	var form = new multiparty.Form();
+	form.on('part', function(part) {
+		if (part.filename) {
+			var filename = part.filename;
+			var size = part.byteCount;
+
+			var onError = function(error) {
+				if (error){
+					res.status(500).send({message: "Error uploading blob."});
+				}
+			}
+			
+			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
+		} else {
+			form.handlePart(part);
+		}
+	});
+	form.parse(req);
+	res.status(200).send({message: "Successfully uploaded blob."})
+});
