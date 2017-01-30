@@ -13,7 +13,6 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   if(process.env.MYSQLCONNSTR_defaultConnection){
-
     var splitArray = process.env.MYSQLCONNSTR_defaultConnection.split
 
     config.database = process.env.Database;
