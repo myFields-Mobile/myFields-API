@@ -33,11 +33,14 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 					return;
 				}
 				else{
+					// Concatenate entry from azure table
 					blobs += result.entries;
+					// If there is a continuation token, recursively call handleBlobs
 					if(result.continuationToken)
 					{
 						handleBlobs(container, result.continuationToken);
 					}
+					// If there is no continuation token, we're done
 					else
 					{
 						res.status(200).send(JSON.stringify(blobs));
@@ -64,6 +67,7 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']) fu
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	else {
+		// Open blob stream to client device
 		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function(result, response){
 			// TODO: change this to stream from Azure to client device
 			if(error){

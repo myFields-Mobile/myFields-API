@@ -1,4 +1,3 @@
-/*
 const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
@@ -12,19 +11,28 @@ const simpleOauthModule = require('simple-oauth2');
 const app = express();
 const oauth2 = simpleOauthModule.create({
   client: {
-    id: process.env.OAUTH_KEY,
-    secret: process.env.OAUTH_SECRET,
+    //id: process.env.OAUTH_KEY,
+    //secret: process.env.OAUTH_SECRET,
+    id: 'gE73dGnozdQp8Xgj3PEf4dgxez8pa7EN',
+    secret: 'j8Cagf3oG2v9ssX27QkKj4beb9A5UMLS'
+    // Github Testing
+    //id: 'c3ef8c23e04510bc59b3',
+    //secret: '851d07cb1724cd94224e3f5ff4fc19a5594ace18'
   },
   auth: {
     tokenHost: 'https://svcs.ext.solotandem.com:32768',
+    //tokenHost: 'https://github.com',
     tokenPath: '/oauth/access_token',
-    authorizePath: '/oauth/authorize',
+    //tokenPath: '/login/oauth/access_token',
+    authorizePath: '/oauth/authorize'
+    //authorizePath: '/login/oauth/authorize'
   },
 });
 
 // Authorization uri definition
 const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'oob'
+  // redirect_uri: 'oob'
+  redirect_uri: 'http://10.131.231.41/callback'
 });
 
 // Initial page redirecting to myFields
@@ -56,7 +64,7 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/success', (req, res) => {
-  res.send('');
+  res.send('Horaay!');
 });
 
 app.get('/', (req, res) => {
@@ -68,9 +76,9 @@ app.listen(80, () => {
 });
 
 
-// Credits to [@lazybean](https://github.com/lazybean)
-*/
+// Credits for the above to [@lazybean](https://github.com/lazybean)
 
+/*
 const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
@@ -88,6 +96,7 @@ var router = express.Router({mergeParams:true});
  * @apiSuccess {String} message A welcome message to the api.
  * @apiSuccess {String} token The valid Json Web Token needed for authentication.
  */
+ /*
 router.post('/', function(req, res, next) {
   if(!req.body.email || !req.body.password) {
     res.status(500).send({
@@ -129,4 +138,5 @@ router.post('/', function(req, res, next) {
     });
   }
 });
+*/
 module.exports = router;
