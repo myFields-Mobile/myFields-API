@@ -14,7 +14,7 @@ var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
  *
  * @apiHeader {String} x-access-token Valid authentication JWT.
  *
- * @apiSuccess {array} object Entire AppData table
+ * @apiSuccess {Array} object Entire AppData table
  */
 router.get('/', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next) {
     models.AppData.findAll()
@@ -84,7 +84,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
     }
 });
 
-/*
+/**
  * @api {delete} api/appdata/remove Remove an entry
  * @apiName DeleteReport
  * @apiGroup AppData
@@ -156,7 +156,7 @@ router.get('/filter/location', isAuthenticated, isTypes(["Admin", "Inspector"]),
  *
  * @apiParam {String} app The App to filter by
  */
-router.get('/filter/app', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
+router.get('/filter/app', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
 	models.AppData.findAll({ app: req.body.app })
 	.then(function (result) {
 		res.send(result);
@@ -166,8 +166,9 @@ router.get('/filter/app', isAuthenticated, isTypes["Admin", "Inspector"], functi
 	});
 });
 
+/*
 // Get images
-router.get('/get/images', isAuthenticated, isTypes["Admin", "Inspector"], function(req, res, next){
+router.get('/get/images', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
 	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
 	.then(function (result){
 		// TODO: something with the image urls here
@@ -176,5 +177,5 @@ router.get('/get/images', isAuthenticated, isTypes["Admin", "Inspector"], functi
 		res.status(500).send(err);
 	});
 });
-
+*/
 module.exports = router;
