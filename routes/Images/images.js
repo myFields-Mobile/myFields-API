@@ -2,7 +2,6 @@ var express = require('express');
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
-var azure = require('azure');
 var multiparty = require('multiparty');
 var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAuthenticated;
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
