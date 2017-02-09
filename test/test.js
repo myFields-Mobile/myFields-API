@@ -9,6 +9,7 @@ var inspectionTest = require('./Inspection/inspection');
 var adminTest = require('./Admin/admin');
 var appTest = require('./App/app');
 var appDataTest = require('./AppData/appData');
+var imagesTest = require('./Images/images');
 
 /**
  * User Tests

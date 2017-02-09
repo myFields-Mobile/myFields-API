@@ -84,6 +84,7 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), f
 	// }
     else
     {
+    	// Make sure the image exists
         blobSvc.getBlobProperties(req.body.container, req.body.blob, function(error, properties, status)
         {
             if (error)
@@ -96,7 +97,10 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), f
             }
             else
             {
+                // TODO: double-check this. I'm not too sure
+            	// We are streaming the image and downloading of it can be client-side
                 blobSvc.createReadStream(req.body.container, req.body.blob).pipe(res);
+                res.status(200);
             }
         })
     }
