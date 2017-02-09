@@ -282,6 +282,8 @@ describe('Inspection', function() {
     });
   });
 
+  // 2016-2017 Team's Tests start here
+
   /**
    * Admin Tests
    */
@@ -289,9 +291,8 @@ describe('Inspection', function() {
   describe('Admin', function() {
     before(function(done) {
       done();
+    });
   });
-
-  };
 
    /**
    * App Tests
@@ -300,9 +301,8 @@ describe('Inspection', function() {
    describe('App', function() {
     before(function(done) {
       done();
+    });
   });
-
-  };
 
    /**
    * AppData Tests
@@ -311,8 +311,7 @@ describe('Inspection', function() {
    describe('AppData', function() {
     before(function(done) {
       done();
+    });
   });
-
-  };
 
 });
