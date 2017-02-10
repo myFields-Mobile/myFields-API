@@ -9,7 +9,6 @@ const app = express();
 
 'use strict';
 
-
 var oauth_consumer_key: process.env.OAUTH_KEY,
 var oauth_consumer_secret:  process.env.OAUTH_SECRET
 
@@ -24,6 +23,20 @@ app.get('/auth', (req, res) => {
     oauth_callback: 'oob',
     oauth_consumer_key: oauth_consumer_key,
     oauth_consumer_secret:  oauth_consumer_secret
+  }
+
+// Initial page redirecting to myFields
+app.get('/auth', (req, res) => {
+  var qs = require('querystring')
+
+  var oauth_consumer_key: process.env.OAUTH_KEY,
+  var oauth_consumer_secret:  process.env.OAUTH_SECRET
+
+  var oauth = {
+    oauth_callback: 'oob',
+    oauth_consumer_key: oauth_consumer_key,
+    oauth_consumer_secret:  oauth_consumer_secret
+    oauth_signature_method: 'HMAC-SHA1'
   }
 
   // TODO: This is insecure - we need to get a valid certificiate
@@ -49,7 +62,7 @@ app.get('/auth', (req, res) => {
         url = host + token_path;
     // TODO: I think this is for testing from the tutorial - we probably
     // just need to store the token and secret - ask Nathan
-    // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing 
+    // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
 		request.post({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
