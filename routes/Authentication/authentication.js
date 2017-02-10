@@ -32,10 +32,14 @@ app.get('/login', (req, res) => {
 // Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
   var qs = require('querystring')
+  
+  var oauth_consumer_key: process.env.OAUTH_KEY,
+  var oauth_consumer_secret:  process.env.OAUTH_SECRET
+  
   var oauth = {
     oauth_callback: 'oob',
-    oauth_consumer_key: 'gE73dGnozdQp8Xgj3PEf4dgxez8pa7EN',//process.env.OAUTH_KEY,
-    oauth_consumer_secret: 'j8Cagf3oG2v9ssX27QkKj4beb9A5UMLS', //process.env.OAUTH_SECRET
+    oauth_consumer_key: oauth_consumer_key,
+    oauth_consumer_secret:  oauth_consumer_secret
     oauth_signature_method: 'HMAC-SHA1'
   }
 
@@ -44,22 +48,43 @@ app.get('/auth', (req, res) => {
   {
     console.log(err)
     console.log(body)
+	// TODO: for some reason this body is empty
     var req_data = qs.parse(body)
     console.log(req_data)
-    res.end()
+	// Redirect user to authorize uri
+    var uri = host + authorizePath + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+	// After token is authorized
+	var auth_data = qs.parse(body),
+		oauth = 
+		{
+			consumer_key: consumer_key,
+			consumer_secret: oauth_consumer_secret,
+			token: auth_data.oauth_token,
+			token_secret: req_data.oauth_token_secret,
+			verifier: auth_data.oauth_verifier
+		},
+		url = host + token_path;
+		// TODO: left off here
+		request.post({url:url, oauth:oauth}, function (e, r, body) {
+			// ready to make signed requests on behalf of the user 
+			var perm_data = qs.parse(body)
+			  , oauth =
+				{ consumer_key: CONSUMER_KEY
+				, consumer_secret: CONSUMER_SECRET
+				, token: perm_data.oauth_token
+				, token_secret: perm_data.oauth_token_secret
+				}
+			  , url = 'https://api.twitter.com/1.1/users/show.json'
+			  , qs =
+				{ screen_name: perm_data.screen_name
+				, user_id: perm_data.user_id
+				}
+			  ;
+			request.get({url:url, oauth:oauth, qs:qs, json:true}, function (e, r, user) {
+			  console.log(user)
+			})
+	  })
   })
-});
-
-// Callback service parsing the authorization token and asking for the access token
-app.get('/callback', (req, res) => {
-  const code = req.query.code;
-  const options = {
-    code,
-  }
-});
-
-app.get('/success', (req, res) => {
-  res.send('Horaay!');
 });
 
 app.get('/', (req, res) => {
