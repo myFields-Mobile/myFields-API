@@ -9,46 +9,31 @@ const app = express();
 
 'use strict';
 
-var oauth_consumer_key: process.env.OAUTH_KEY,
-var oauth_consumer_secret:  process.env.OAUTH_SECRET
+var oauth_consumer_key = process.env.OAUTH_KEY,
+var oauth_consumer_secret = process.env.OAUTH_SECRET
 
-var host = 'https://svcs.ext.solotandem.com:32768';
+var host = https = 'https://svcs.ext.solotandem.com:32768';
+var request_token_path = '/oauth/request_token';
 var token_path = '/oauth/access_token';
-var authorizePath= '/oauth/authorize';
+var authorize_path= '/oauth/authorize';
 
 // Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
-
   var oauth = {
-    oauth_callback: 'oob',
+    oauth_callback: '/success',
     oauth_consumer_key: oauth_consumer_key,
-    oauth_consumer_secret:  oauth_consumer_secret
-  }
-
-// Initial page redirecting to myFields
-app.get('/auth', (req, res) => {
-  var qs = require('querystring')
-
-  var oauth_consumer_key: process.env.OAUTH_KEY,
-  var oauth_consumer_secret:  process.env.OAUTH_SECRET
-
-  var oauth = {
-    oauth_callback: 'oob',
-    oauth_consumer_key: oauth_consumer_key,
-    oauth_consumer_secret:  oauth_consumer_secret
+    oauth_consumer_secret:  oauth_consumer_secret,
     oauth_signature_method: 'HMAC-SHA1'
   }
 
   // TODO: This is insecure - we need to get a valid certificiate
-  request.post({url:host+token_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
+  request.post({url:host+request_token, oauth:oauth}, function(err, response, body)
   {
     console.log(err)
-    console.log(body)
 	  // TODO: for some reason this body is empty
     var req_data = qs.parse(body)
-    console.log(req_data)
 	  // Redirect user to authorize uri
-    var uri = host + authorizePath + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+    var uri = host + token_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
 	   // After token is authorized
 	  var auth_data = qs.parse(body),
         oauth =
@@ -60,26 +45,34 @@ app.get('/auth', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
+    res.redirect(uri)
+
     // TODO: I think this is for testing from the tutorial - we probably
     // just need to store the token and secret - ask Nathan
     // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
+    /*
 		request.post({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
-          oauth =
-  				{
-            consumer_key: CONSUMER_KEY,
-            consumer_secret: CONSUMER_SECRET,
-            token: perm_data.oauth_token,
-            token_secret: perm_data.oauth_token_secret
-  				}
-			})
+        oauth =
+				{
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: perm_data.oauth_token,
+          token_secret: perm_data.oauth_token_secret
+				}        
+        console.log(oauth)
 	  })
-  })
+    */
+	})
 });
 
 app.get('/', (req, res) => {
   res.send('Hello<br><a href="/auth">Log in with myFields</a>');
+});
+
+app.get('/success', (req, res) => {
+  res.send("Success")
 });
 
 app.listen(80, () => {
