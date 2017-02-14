@@ -48,5 +48,10 @@
     "image": "",
     "geoloc": [ 39.1899236539363, -96.59222602844238 ],
     "active": false
+  },
+  "newBlob":{
+    "container": "",
+    "blob": "myFieldsLogo.png",
+    "filename": "myFieldsLogo.png"
   }
 }

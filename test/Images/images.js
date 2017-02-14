@@ -1,7 +1,8 @@
 var request = require('supertest');
 var should = require('should');
 var assert = require('assert');
-var config = require('../config.json');
+// var config = require('../config.json');
+var newBlob = require('../config.json').newBlob;
 var url = config.url;
 var jwt = config.jwt;
 var exports = module.exports = {};
@@ -60,8 +61,8 @@ exports.addBlobSuccess = function (done)
     // This is not valid yet
     var blankBlob =
         {
-            container: '', // TODO: get this stuff into config.json
-            filename: ''
+            container: newBlob.container, // TODO: get this stuff into config.json
+            filename: newBlob.filename
         };
     request(url)
         .get('api/images/addBlob')
@@ -112,11 +113,11 @@ exports.readBlobFail = function (done)
 exports.readBlobSuccess = function (done)
 {
     // This is not valid yet
+    var blobToRead = new File(newBlob.blob); // File is a sub-class of blob, so this should work
     var blobInfo =
         {
-            container: '', // TODO: Get this stuff in config.json
-            blob: '',
-            output: ''
+            container: newBlob.container, // TODO: Get this stuff in config.json
+            blob: blobToRead
         };
     request(url)
         .get('api/images/downloadBlob')
@@ -166,10 +167,11 @@ exports.deleteBlobFail = function (done)
 exports.deleteBlobSuccess = function (done)
 {
     // This is not yet valid
+    var blobFile = new File(newBlob.blob);
     var blobToDelete =
         {
-            container: '',  // TODO: get this stuff in config.json
-            blob: ''
+            container: newBlob.container,  // TODO: get this stuff in config.json
+            blob: blobFile
         };
     request(url)
         .get('api/images/deleteBlob')
