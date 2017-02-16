@@ -91,10 +91,11 @@ router.post('/create', isAuthenticated, function(req, res, next) {
  * @apiSuccess {String} message A success message.
  */
 router.delete('/remove', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res){
-	// I am not sure about the 'entries' part
+	// TODO: I am not sure about the 'entries' part
 	Entry.findById(req.body.id)
 		.exec(function(err, entries){
 			if(err || !entries){
+                // TODO: Maybe clarify this error message a bit
 				res.status(500).send(err);
 			}
 			else{
@@ -165,6 +166,7 @@ router.get('/filter/app', isAuthenticated, isTypes(["Admin", "Inspector"]), func
 
 /*
 // Get images
+// TODO: Finish this once image routes are completely done
 router.get('/get/images', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
 	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
 	.then(function (result){

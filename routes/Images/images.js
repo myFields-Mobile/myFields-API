@@ -133,7 +133,8 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 			}
 			
 			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
-		} else {
+		} 
+		else {
 			form.handlePart(part);
 		}
 	});

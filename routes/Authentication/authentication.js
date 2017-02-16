@@ -9,31 +9,29 @@ const app = express();
 
 'use strict';
 
-var oauth_consumer_key = process.env.OAUTH_KEY,
+var oauth_consumer_key = process.env.OAUTH_KEY;
 var oauth_consumer_secret = process.env.OAUTH_SECRET
 
-var host = https = 'https://svcs.ext.solotandem.com:32768';
-var request_token_path = '/oauth/request_token';
-var token_path = '/oauth/access_token';
-var authorize_path= '/oauth/authorize';
+var host = 'https://svcs.ext.solotandem.com:32768';
+var request_path = '/oauth/request_token/';
+var token_path = '/oauth/access_token/';
+var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
   var oauth = {
-    oauth_callback: '/success',
-    oauth_consumer_key: oauth_consumer_key,
-    oauth_consumer_secret:  oauth_consumer_secret,
-    oauth_signature_method: 'HMAC-SHA1'
+    callback: 'oob',
+    consumer_key: oauth_consumer_key,
+    consumer_secret:  oauth_consumer_secret
   }
 
   // TODO: This is insecure - we need to get a valid certificiate
-  request.post({url:host+request_token, oauth:oauth}, function(err, response, body)
+  request.post({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
-    console.log(err)
-	  // TODO: for some reason this body is empty
+    // Parse response to retrieve token
     var req_data = qs.parse(body)
 	  // Redirect user to authorize uri
-    var uri = host + token_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
 	   // After token is authorized
 	  var auth_data = qs.parse(body),
         oauth =
