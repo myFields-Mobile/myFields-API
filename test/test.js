@@ -404,7 +404,13 @@ describe('Images', function () {
        });
     });
 
-    // TODO: Valid test adding blob
+    describe('Valid blob addition', function(done)
+    {
+       it('should succeed to upload a blob', function (done)
+       {
+          imagesTest.addBlobSuccess(done);
+       });
+    });
 
     describe('Invalid blob stream reading', function (done)
     {
@@ -414,15 +420,27 @@ describe('Images', function () {
        });
     });
 
-    // TODO: Valid test reading blob stream
+    describe('Valid blob stream reading', function (done)
+    {
+        it('should succeed to read a blob stream', function (done)
+        {
+            imagesTest.readBlobSuccess(done);
+        });
+    });
 
     describe('Invalid blob deletion', function (done)
     {
-       it('should fail to delete a blob', function (done)
+       it('should fail in deleting a blob', function (done)
        {
           imagesTest.deleteBlobFail(done);
        });
     });
 
-    // TODO: Valid test deleting a blob
+    describe('Valid blob deletion', function (done)
+    {
+        it('should succeed in deleting a blob', function (done)
+        {
+            imagesTest.deleteBlobSuccess(done);
+        });
+    });
 });

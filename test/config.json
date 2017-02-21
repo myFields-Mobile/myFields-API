@@ -50,7 +50,7 @@
     "active": false
   },
   "newBlob":{
-    "container": "",
+    "container": "myfields-test",
     "blob": "myFieldsLogo.png",
     "filename": "myFieldsLogo.png"
   }

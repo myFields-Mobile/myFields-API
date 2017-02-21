@@ -160,7 +160,6 @@ exports.deleteBlobFail = function (done)
         });
 };
 
-
 /**
  * Valid test deleting a blob
  */
