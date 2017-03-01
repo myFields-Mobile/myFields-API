@@ -66,7 +66,7 @@ app.get('/auth', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello<br><a href="/auth">Log in with myFields</a>');
+  res.redirect('/auth')
 });
 
 app.get('/success', (req, res) => {
