@@ -5,7 +5,6 @@ var azure = require('azure-storage');
 var multiparty = require('multiparty');
 var isAuthenticated = require('../Authentication/authenticationMiddlewear').isAuthenticated;
 var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
-
 var blobSvc = azure.createBlobService();
 
 /**
@@ -18,18 +17,21 @@ var blobSvc = azure.createBlobService();
  *
  * @apiSuccess {array} object Array of blob descriptions
  */
-router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), function(req, res, next) {
-	if(!req.body.container) {
+router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), function(req, res, next)
+{
+	if(!req.body.container)
+	{
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	else {
 		var blobs = [];
 		// Helper function for calling Azure API
 		function handleBlobs(container, token){
-			blobSvc.listBlobsSegmented(container, token, function(error, result, response){
-				if(error){
+			blobSvc.listBlobsSegmented(container, token, function(error, result, response)
+            {
+				if(error)
+				{
 					res.status(500).send({message: "Error getting blobs from Azure"});
-					return;
 				}
 				else{
 					// Concatenate entry from azure table
@@ -49,7 +51,7 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 		}
 		handleBlobs(req.body.container, null);
 	}
-})
+});
 
 /**
  * @api {post} api/images/downloadBlob DownloadBlob
@@ -61,24 +63,32 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
  * @apiParam {string} blob The name of the blob to download
  * @apiParam {string} output File name to save blob to locally
  */
-router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']) function(req, res, next) {
-	if(!req.body.container || !req.body.blob || !req.body.output){
+router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), function(req, res, next)
+{
+	if(!req.body.container || !req.body.blob || !req.body.output)
+	{
 		res.status(500).send({message: "Missing post parameters."});
 	}
-	else {
-		// Open blob stream to client device
-		blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function(result, response){
-			// TODO: change this to stream from Azure to client device
-			if(error){
-				res.status(500).send({message: "Error downloading blob from Azure."});
-				return;
-			}
-			else{
-				res.status(200).send({message: "Blob retrieved."});
-			}
-		}
-	}
-})
+    else
+    {
+        blobSvc.getBlobProperties(req.body.container, req.body.blob, function(error, properties, status)
+        {
+            if (error)
+            {
+                res.send(500, "Error fetching file: %s", error.message);
+            }
+            else if (!status.isSuccessful)
+            {
+                res.send(404, "The file %s does not exist", req.body.blob);
+            }
+            else
+            {
+                blobSvc.createReadStream(req.body.container, req.body.blob).pipe(res);
+            }
+        })
+    }
+
+});
 
 /**
  * @api {post} api/images/deleteBlob DeleteBlob
@@ -102,9 +112,9 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
 			else {
 				res.status(200).send({message: "Blob deleted."});
 			}
-		})
+		});
 	}
-})
+});
 
 /**
  * @api {post} api/images/addBlob addBlob

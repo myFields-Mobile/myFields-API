@@ -1,3 +1,6 @@
+// Comment up here?
+// Check styling for brackets & stuff
+
 var express = require('express');
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
@@ -51,7 +54,7 @@ router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), functio
  * @apiParam {String} jsondata The json string containing the data to submit (optional)
  * @apiParam {String} image The URL to the location where the image is stored (S3, Azure, etc)
  * @apiParam {Double} longitude The GPS longitude (optional)
- * @apiParam {Double} lattitude the GPS lattitude (optional)
+ * @apiParam {Double} latitude the GPS latitude (optional)
  */
 router.post('/create', isAuthenticated, function(req, res, next) {
     if(!req.body.username) 
@@ -60,8 +63,8 @@ router.post('/create', isAuthenticated, function(req, res, next) {
     }
     else {
         var geolocation;
-        if (req.body.longitude != 'undefined' && req.body.lattitude != 'undefined'){
-            geolocation = point(req.body.longitude, req.body.lattitude);
+        if (req.body.longitude != 'undefined' && req.body.latitude != 'undefined'){
+            geolocation = point(req.body.longitude, req.body.latitude);
         }
         models.AppData.create({
             username: req.decoded,
@@ -170,7 +173,7 @@ router.get('/filter/app', isAuthenticated, isTypes(["Admin", "Inspector"]), func
 router.get('/get/images', isAuthenticated, isTypes(["Admin", "Inspector"]), function(req, res, next){
 	models.AppData.findAll({ where: "select images from models.AppData", raw: true})
 	.then(function (result){
-		//going to do something with the image urls here
+		// TODO: something with the image urls here
 	})
 	.err(function (err) {
 		res.status(500).send(err);

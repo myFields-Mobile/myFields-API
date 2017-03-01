@@ -10,7 +10,7 @@ var newCrop = config.newCrop;
 exports.createCrop = function (done) {
     request(url)
         .post('/api/crop/create')
-        .set('x-access-token', jwt)
+        .set(;
         .send(newCrop)
         .end(function (err, res) {
             if (err) {
