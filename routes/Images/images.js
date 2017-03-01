@@ -33,13 +33,15 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 				{
 					res.status(500).send({message: "Error getting blobs from Azure"});
 				}
-				else
-				{
+				else{
+					// Concatenate entry from azure table
 					blobs += result.entries;
+					// If there is a continuation token, recursively call handleBlobs
 					if(result.continuationToken)
 					{
 						handleBlobs(container, result.continuationToken);
 					}
+					// If there is no continuation token, we're done
 					else
 					{
 						res.status(200).send(JSON.stringify(blobs));
@@ -67,21 +69,6 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), f
 	{
 		res.status(500).send({message: "Missing post parameters."});
 	}
-	// else
-	// {
-	// 	blobSvc.getBlobToStream(req.body.container, req.body.blob, req.body.output, function(error, result, response)
-	// 	{
-	// 		// TODO: change this to stream from Azure to client device
-	// 		if(error)
-	// 		{
-	// 			res.status(500).send({message: "Error downloading blob from Azure."});
-	// 		}
-	// 		else
-	// 		{
-	// 			res.status(200).send({message: "Blob retrieved."});
-	// 		}
-	// 	});
-	// }
     else
     {
         blobSvc.getBlobProperties(req.body.container, req.body.blob, function(error, properties, status)
@@ -156,7 +143,8 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 			}
 			
 			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
-		} else {
+		} 
+		else {
 			form.handlePart(part);
 		}
 	});

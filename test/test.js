@@ -282,7 +282,17 @@ describe('Inspection', function() {
     });
   });
 
-});
+  // 2016-2017 Team's Tests start here
+
+  /**
+   * Admin Tests
+   */
+
+  describe('Admin', function() {
+    before(function(done) {
+      done();
+    });
+  });
 
    /**
    * App Tests
@@ -291,6 +301,7 @@ describe('Inspection', function() {
    describe('App', function() {
     before(function(done) {
       done();
+    });
   });
 
     describe('List All Apps', function(done){
@@ -311,16 +322,15 @@ describe('Inspection', function() {
       });
     });
 
-  });
-
    /**
    * AppData Tests
    */
 
-   describe('AppData', function() {
-    before(function(done) {
-      done();
-  });
+    describe('AppData', function() {
+        before(function(done) {
+            done();
+        });
+    });
 
     describe('List All AppData', function(done){
       it('should list all of the appdata information', function(done){
@@ -382,4 +392,4 @@ describe('Inspection', function() {
       });
     });
 
-  });
+});

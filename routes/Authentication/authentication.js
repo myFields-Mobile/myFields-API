@@ -1,76 +1,83 @@
-/*
 const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
 var config = require('../../config/config');
+var request = require('request');
+var qs = require('querystring');
 var router = express.Router({mergeParams:true});
+const app = express();
 
 'use strict';
 
-const simpleOauthModule = require('simple-oauth2');
+var oauth_consumer_key = process.env.OAUTH_KEY;
+var oauth_consumer_secret = process.env.OAUTH_SECRET;
 
-const app = express();
-const oauth2 = simpleOauthModule.create({
-  client: {
-    id: process.env.OAUTH_KEY,
-    secret: process.env.OAUTH_SECRET,
-  },
-  auth: {
-    tokenHost: 'https://svcs.ext.solotandem.com:32768',
-    tokenPath: '/oauth/access_token',
-    authorizePath: '/oauth/authorize',
-  },
-});
-
-// Authorization uri definition
-const authorizationUri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'oob'
-});
+var host = 'http://svcs.solotandem.com:13377';
+var request_path = '/oauth/request_token/';
+var token_path = '/oauth/access_token/';
+var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
-  console.log(authorizationUri);
-  res.redirect(authorizationUri);
-});
+  var oauth = {
+    callback: 'oob',
+    consumer_key: oauth_consumer_key,
+    consumer_secret:  oauth_consumer_secret
+  }
 
-// Callback service parsing the authorization token and asking for the access token
-app.get('/callback', (req, res) => {
-  const code = req.query.code;
-  const options = {
-    code,
-  };
+  // TODO: This is insecure - we need to get a valid certificiate
+  request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
+  {
+    // Parse response to retrieve token
+    var req_data = qs.parse(body)
+	  // Redirect user to authorize uri
+    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+	   // After token is authorized
+	  var auth_data = qs.parse(body),
+        oauth =
+        {
+        	consumer_key: oauth_consumer_key,
+        	consumer_secret: oauth_consumer_secret,
+        	token: auth_data.oauth_token,
+        	token_secret: req_data.oauth_token_secret,
+        	verifier: auth_data.oauth_verifier
+        },
+        url = host + token_path;
+    res.redirect(uri)
 
-  oauth2.authorizationCode.getToken(options, (error, result) => {
-    if (error) {
-      console.error('Access Token Error', error.message);
-      return res.json('Authentication failed');
-    }
-
-    console.log('The resulting token: ', result);
-    const token = oauth2.accessToken.create(result);
-
-    return res
-      .status(200)
-      .json(token);
-  });
-});
-
-app.get('/success', (req, res) => {
-  res.send('');
+    // TODO: I think this is for testing from the tutorial - we probably
+    // just need to store the token and secret - ask Nathan
+    // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
+    /*
+		request.post({url:url, oauth:oauth}, function (e, r, body) {
+			// ready to make signed requests on behalf of the user
+			var perm_data = qs.parse(body),
+        oauth =
+				{
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: perm_data.oauth_token,
+          token_secret: perm_data.oauth_token_secret
+				}        
+        console.log(oauth)
+	  })
+    */
+	})
 });
 
 app.get('/', (req, res) => {
   res.send('Hello<br><a href="/auth">Log in with myFields</a>');
 });
 
+app.get('/success', (req, res) => {
+  res.send("Success")
+});
+
 app.listen(80, () => {
   console.log('Express server started on port 80');
 });
 
-
-// Credits to [@lazybean](https://github.com/lazybean)
-*/
-
+/*
 const express = require('express');
 var jwt    = require('jsonwebtoken');
 var models  = require('../../models');
@@ -88,6 +95,7 @@ var router = express.Router({mergeParams:true});
  * @apiSuccess {String} message A welcome message to the api.
  * @apiSuccess {String} token The valid Json Web Token needed for authentication.
  */
+ /*
 router.post('/', function(req, res, next) {
   if(!req.body.email || !req.body.password) {
     res.status(500).send({
@@ -129,4 +137,5 @@ router.post('/', function(req, res, next) {
     });
   }
 });
+*/
 module.exports = router;
