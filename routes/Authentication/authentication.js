@@ -10,9 +10,9 @@ const app = express();
 'use strict';
 
 var oauth_consumer_key = process.env.OAUTH_KEY;
-var oauth_consumer_secret = process.env.OAUTH_SECRET
+var oauth_consumer_secret = process.env.OAUTH_SECRET;
 
-var host = 'https://svcs.ext.solotandem.com:32768';
+var host = 'http://svcs.solotandem.com:13377';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
@@ -26,7 +26,7 @@ app.get('/auth', (req, res) => {
   }
 
   // TODO: This is insecure - we need to get a valid certificiate
-  request.post({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
+  request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
