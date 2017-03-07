@@ -3,7 +3,7 @@ var should = require('should');
 var assert = require('assert');
 var config = require('../config.json');
 var url = config.url;
-var jwt = config.jwt;
+var jwt = config.jwt;  // x access token
 var models  = require('../../models');
 var exports = module.exports = {};
 

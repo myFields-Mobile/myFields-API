@@ -61,16 +61,16 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
  * @apiHeader JWT
  * @apiParam {string} container The name of the Azure Storage container (should be provided by app calling API)
  * @apiParam {string} blob The name of the blob to download
- * @apiParam {string} output File name to save blob to locally
  */
 router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), function(req, res, next)
 {
-	if(!req.body.container || !req.body.blob || !req.body.output)
+	if(!req.body.container || !req.body.blob)
 	{
 		res.status(500).send({message: "Missing post parameters."});
 	}
     else
     {
+    	// Make sure the image exists
         blobSvc.getBlobProperties(req.body.container, req.body.blob, function(error, properties, status)
         {
             if (error)
@@ -83,7 +83,10 @@ router.post('/downloadBlob', isAuthenticated, isTypes(['Admin', 'Inspector']), f
             }
             else
             {
+                // TODO: double-check this. I'm not too sure
+            	// We are streaming the image and downloading of it can be client-side
                 blobSvc.createReadStream(req.body.container, req.body.blob).pipe(res);
+                res.status(200);
             }
         })
     }
@@ -127,7 +130,7 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
  */
 router.post('/addBlob', isAuthenticated, function(req, res, next)
 {
-	if(!req.body.container || !req.body.blob || !req.body.input){
+	if(!req.body.container || !req.body.input){
 		res.status(500).send({message: "Missing post parameters."});
 	}
 	var form = new multiparty.Form();
@@ -140,7 +143,7 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 				if (error){
 					res.status(500).send({message: "Error uploading blob."});
 				}
-			}
+			};
 			
 			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
 		} 
