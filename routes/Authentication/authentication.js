@@ -7,10 +7,11 @@ const app = express();
 
 'use strict';
 
-var oauth_consumer_key = process.env.OAUTH_KEY;
-var oauth_consumer_secret = process.env.OAUTH_SECRET;
+var oauth_consumer_key = 'REDACTED';//process.env.OAUTH_KEY;
+var oauth_consumer_secret = 'REDACTED';//process.env.OAUTH_SECRET;
 
-var host = 'http://svcs.solotandem.com:32768';
+// TODO: this might be a non-production endpoint
+var host = 'https://svcs.ext.solotandem.com:32768';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
@@ -24,7 +25,9 @@ app.get('/auth', (req, res) => {
     consumer_secret:  oauth_consumer_secret
   }
 
-  // TODO: This is insecure - we need to get a valid certificiate
+  // TODO: This is insecure - the myFields API endpoint needs to get a valid certificate
+  //       once a new certificate is acquired, remove the rejectUnauthorized flag
+  // TODO: this may need to be changed to request.post if the myFields API endpoint changes
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
     // Parse response to retrieve token
