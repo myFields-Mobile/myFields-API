@@ -277,6 +277,7 @@ describe('Inspection', function() {
         });
     });
 
+<<<<<<< HEAD
     describe('List All Inspections', function (done) {
         it('should list all inspections including the deactive ones', function (done) {
             inspectionTest.listDeactiveInspections(done);
@@ -290,6 +291,34 @@ describe('Inspection', function() {
 describe('App', function() {
     before(function (done) {
         done();
+=======
+  // 2016-2017 Team's Tests start here
+
+  /**
+   * Admin Tests
+   */
+
+  describe('Admin', function() {
+    before(function(done) {
+      done();
+    });
+  });
+
+   /**
+   * App Tests
+   */
+
+   describe('App', function() {
+    before(function(done) {
+      done();
+    });
+  });
+
+    describe('List All Apps', function(done){
+      it('should list all of the apps', function(done){
+        appTest.listAllApps(done);
+      });
+>>>>>>> dev-master
     });
 
     describe('List All Apps', function (done) {
@@ -304,10 +333,27 @@ describe('App', function() {
         });
     });
 
+<<<<<<< HEAD
     describe('Create Valid App', function (done) {
         it('should succeed to create an app', function (done) {
             appTest.createValidApp(done);
         });
+=======
+   /**
+   * AppData Tests
+   */
+
+    describe('AppData', function() {
+        before(function(done) {
+            done();
+        });
+    });
+
+    describe('List All AppData', function(done){
+      it('should list all of the appdata information', function(done){
+        appDataTest.listAllAppData(done);
+      });
+>>>>>>> dev-master
     });
 });
 
@@ -443,4 +489,9 @@ describe('Images', function () {
             imagesTest.deleteBlobSuccess(done);
         });
     });
+<<<<<<< HEAD
 });
+=======
+
+});
+>>>>>>> dev-master

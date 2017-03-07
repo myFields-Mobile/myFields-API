@@ -33,13 +33,15 @@ router.post('/listBlobs', isAuthenticated, isTypes(['Admin', 'Inspector']), func
 				{
 					res.status(500).send({message: "Error getting blobs from Azure"});
 				}
-				else
-				{
+				else{
+					// Concatenate entry from azure table
 					blobs += result.entries;
+					// If there is a continuation token, recursively call handleBlobs
 					if(result.continuationToken)
 					{
 						handleBlobs(container, result.continuationToken);
 					}
+					// If there is no continuation token, we're done
 					else
 					{
 						res.status(200).send(JSON.stringify(blobs));
@@ -144,7 +146,8 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 			};
 			
 			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
-		} else {
+		} 
+		else {
 			form.handlePart(part);
 		}
 	});
