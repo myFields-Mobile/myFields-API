@@ -1,6 +1,4 @@
 const express = require('express');
-var jwt    = require('jsonwebtoken');
-var models  = require('../../models');
 var config = require('../../config/config');
 var request = require('request');
 var qs = require('querystring');
@@ -12,13 +10,14 @@ const app = express();
 var oauth_consumer_key = process.env.OAUTH_KEY;
 var oauth_consumer_secret = process.env.OAUTH_SECRET;
 
-var host = 'http://svcs.solotandem.com:13377';
+var host = 'http://svcs.solotandem.com:32768';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
 app.get('/auth', (req, res) => {
+  // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
     callback: 'oob',
     consumer_key: oauth_consumer_key,
@@ -45,11 +44,10 @@ app.get('/auth', (req, res) => {
         url = host + token_path;
     res.redirect(uri)
 
-    // TODO: I think this is for testing from the tutorial - we probably
-    // just need to store the token and secret - ask Nathan
-    // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
+    // TODO: what do we do after they're authenticated?
+
     /*
-		request.post({url:url, oauth:oauth}, function (e, r, body) {
+		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
         oauth =
@@ -58,15 +56,19 @@ app.get('/auth', (req, res) => {
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
-				}        
-        console.log(oauth)
+				},
+        url = host + '/node.json?';
+      request.get({url:url, oauth:oauth, json:true}, function(e, r, body)
+      {
+        console.log(body)
+      })        
 	  })
     */
 	})
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello<br><a href="/auth">Log in with myFields</a>');
+  res.redirect('/auth')
 });
 
 app.get('/success', (req, res) => {
