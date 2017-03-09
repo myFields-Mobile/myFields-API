@@ -7,8 +7,8 @@ const app = express();
 
 'use strict';
 
-var oauth_consumer_key = 'REDACTED';//process.env.OAUTH_KEY;
-var oauth_consumer_secret = 'REDACTED';//process.env.OAUTH_SECRET;
+var oauth_consumer_key = 'key';//process.env.OAUTH_KEY;
+var oauth_consumer_secret = 'secret';//process.env.OAUTH_SECRET;
 
 // TODO: this might be a non-production endpoint
 var host = 'https://svcs.ext.solotandem.com:32768';
@@ -20,6 +20,8 @@ var authorize_path= '/oauth/authorize/';
 app.get('/auth', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
+    // TODO: pretty sure to use myFields as SSO for the app we need
+    //       this to not be 'oob'
     callback: 'oob',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
@@ -34,7 +36,9 @@ app.get('/auth', (req, res) => {
     var req_data = qs.parse(body)
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
-	   // After token is authorized
+    res.redirect(uri);
+
+    // After token is authorized
 	  var auth_data = qs.parse(body),
         oauth =
         {
@@ -45,11 +49,7 @@ app.get('/auth', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
-    res.redirect(uri)
 
-    // TODO: what do we do after they're authenticated?
-
-    /*
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
@@ -66,7 +66,6 @@ app.get('/auth', (req, res) => {
         console.log(body)
       })        
 	  })
-    */
 	})
 });
 
