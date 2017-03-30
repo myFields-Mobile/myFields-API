@@ -3,7 +3,6 @@ var config = require('../../config/config');
 var request = require('request');
 var qs = require('querystring');
 var router = express.Router({mergeParams:true});
-const app = express();
 
 'use strict';
 
@@ -16,7 +15,8 @@ var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
-router.get('/auth', (req, res) => {
+router.get('/', (req, res) => {
+  console.log("FOOBAR")
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
     callback: 'oob',
@@ -65,10 +65,6 @@ router.get('/auth', (req, res) => {
 	  })
     */
 	})
-});
-
-router.get('/', (req, res) => {
-  res.redirect('/auth')
 });
 
 router.get('/callback', (req, res) => {
