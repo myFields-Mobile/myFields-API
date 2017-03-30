@@ -16,7 +16,7 @@ var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
-app.get('/auth', (req, res) => {
+router.get('/auth', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
     callback: 'oob',
@@ -67,16 +67,12 @@ app.get('/auth', (req, res) => {
 	})
 });
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.redirect('/auth')
 });
 
-app.get('/success', (req, res) => {
+router.get('/callback', (req, res) => {
   res.send("Success")
-});
-
-app.listen(80, () => {
-  console.log('Express server started on port 80');
 });
 
 /*
