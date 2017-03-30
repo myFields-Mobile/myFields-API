@@ -72,7 +72,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
             image: req.body.image,
             geoloc: geolocation,
             active: false
-        })
+        });
         if (err) {
             res.status(500).send(err);
         }
