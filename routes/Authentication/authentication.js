@@ -9,26 +9,33 @@ var router = express.Router({mergeParams:true});
 var oauth_consumer_key = 'key';//process.env.OAUTH_KEY;
 var oauth_consumer_secret = 'secret';//process.env.OAUTH_SECRET;
 
-// TODO: this might be a non-production endpoint
+// TODO: this is a non-production endpoint and will need to be changed when the app is ready for production
 var host = 'https://svcs.ext.solotandem.com:32768';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
-// Initial page redirecting to myFields
+/**
+ * @api {post} api/authenticate Request authentication token.
+ * @apiName Authenticate
+ * @apiGroup Authentication
+ *
+ * @apiSuccess {String} message A welcome message to the api.
+ * @apiSuccess {String} token The valid Json Web Token needed for authentication.
+ */
 router.get('/', (req, res) => {
-  console.log("FOOBAR")
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
     // TODO: pretty sure to use myFields as SSO for the app we need
     //       this to not be 'oob'
-    callback: 'oob',
+    callback: '/callback',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
   }
 
-  // TODO: This is insecure - the myFields API endpoint needs to get a valid certificate
-  //       once a new certificate is acquired, remove the rejectUnauthorized flag
+  // TODO: Thise rejectUnauthorized: false flag is insecure - the myFields API endpoint
+  //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
+  //       developer, remove the rejectUnauthorized flag
   // TODO: this may need to be changed to request.post if the myFields API endpoint changes
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
