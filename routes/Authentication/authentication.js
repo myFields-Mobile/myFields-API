@@ -3,7 +3,6 @@ var config = require('../../config/config');
 var request = require('request');
 var qs = require('querystring');
 var router = express.Router({mergeParams:true});
-const app = express();
 
 'use strict';
 
@@ -17,7 +16,8 @@ var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
 // Initial page redirecting to myFields
-app.get('/auth', (req, res) => {
+router.get('/', (req, res) => {
+  console.log("FOOBAR")
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
     // TODO: pretty sure to use myFields as SSO for the app we need
@@ -69,16 +69,8 @@ app.get('/auth', (req, res) => {
 	})
 });
 
-app.get('/', (req, res) => {
-  res.redirect('/auth')
-});
-
-app.get('/success', (req, res) => {
+router.get('/callback', (req, res) => {
   res.send("Success")
-});
-
-app.listen(80, () => {
-  console.log('Express server started on port 80');
 });
 
 /*
