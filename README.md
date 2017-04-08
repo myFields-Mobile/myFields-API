@@ -38,5 +38,7 @@ You can also find brief instructions on setting up an environment to run this AP
 the documentation folder.
 
 Links:
+
 Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
+
 Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
