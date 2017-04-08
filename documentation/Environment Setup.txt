@@ -9,7 +9,6 @@ Node Modules:
 (All can be obtained using "npm install packagename" unless specified otherwise)
 
 azure-storage
-simple-oauth2
 express
 busboy
 formidable
