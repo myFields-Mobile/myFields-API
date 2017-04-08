@@ -26,17 +26,19 @@ var authorize_path= '/oauth/authorize/';
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
-    // TODO: pretty sure to use myFields as SSO for the app we need
-    //       this to not be 'oob'
+    // TODO: this callback is not yet working, we are working with
+    // the myFields developer to configure the Oauth endpoint
+    // correctly on his end
     callback: '/callback',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
   }
 
-  // TODO: Thise rejectUnauthorized: false flag is insecure - the myFields API endpoint
+  // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
   //       developer, remove the rejectUnauthorized flag
   // TODO: this may need to be changed to request.post if the myFields API endpoint changes
+  // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
     // Parse response to retrieve token
@@ -56,7 +58,7 @@ router.get('/', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
-
+    
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
@@ -68,10 +70,13 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				},
         url = host + '/node.json?';
+        console.log(body)
+      /*
       request.get({url:url, oauth:oauth, json:true}, function(e, r, body)
       {
-        console.log(body)
+        console.log(oauth)
       })        
+      */
 	  })
 	})
 });
