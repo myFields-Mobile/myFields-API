@@ -1,9 +1,15 @@
 MyFields-API
 
-A node.js and express based api for authentication and data control of all Kansas State Research and Extension applications.
+A node.js and express based API for authentication and data control of all Kansas State 
+Research and Extension applications. This API is designed to be a general purpose API 
+for any myFields application. 
 
-This API is designed to be a general purpose API for any myFields application. The usage
-model is as follows:
+PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE.
+We are currently resolving issues with the Oauth authentication. Once these issues are
+resolved, all of the signed requests that are currently using JsonWebToken will need
+to be modified to use Oauth.
+
+The usage model is as follows:
 
 	0. Before using the application, an entry for the app should be created in the App 
 		table. This table wil store the app's name, which must be unique, and if the app
