@@ -22,4 +22,8 @@ model is as follows:
 		mobile API - speak to the myFields team if you will be working with the
 		myFields.info developer.
 
-Detailed documentation on API methods, as well as environment setup, can be found in the documentation folder.
+Detailed documentation on API methods can be found in the code, or you can view it by 
+opening documentation/index.html in your browser. This documentation is auto-generated
+from documentation in the code using APIdocs, and it can be updated using that utility.
+You can also find brief instructions on setting up an environment to run this API in
+the documentation folder.
