@@ -1,4 +1,5 @@
-#MyFields-API
+MyFields-API
+
 A node.js and express based api for authentication and data control of all Kansas State Research and Extension applications.
 
 This API is designed to be a general purpose API for any myFields application. The usage
