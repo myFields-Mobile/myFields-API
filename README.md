@@ -2,7 +2,10 @@ MyFields-API
 
 A node.js and express based API for authentication and data control of all Kansas State 
 Research and Extension applications. This API is designed to be a general purpose API 
-for any myFields application. 
+for any myFields application.
+
+The myFields team uses Microsoft Azure for this project. Contact Brian McCornack
+(mccornac AT ksu.edu) for access.
 
 PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE.
 We are currently resolving issues with the Oauth authentication. Once these issues are
