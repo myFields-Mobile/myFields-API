@@ -33,3 +33,6 @@ opening documentation/index.html in your browser. This documentation is auto-gen
 from documentation in the code using APIdocs, and it can be updated using that utility.
 You can also find brief instructions on setting up an environment to run this API in
 the documentation folder.
+
+Links:
+Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
