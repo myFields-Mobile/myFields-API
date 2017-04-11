@@ -6,32 +6,48 @@ var router = express.Router({mergeParams:true});
 
 'use strict';
 
-var oauth_consumer_key = process.env.OAUTH_KEY;
-var oauth_consumer_secret = process.env.OAUTH_SECRET;
+var oauth_consumer_key = 'key';//process.env.OAUTH_KEY;
+var oauth_consumer_secret = 'secret';//process.env.OAUTH_SECRET;
 
-var host = 'http://svcs.solotandem.com:32768';
+// TODO: this is a non-production endpoint and will need to be changed when the app is ready for production
+var host = 'https://svcs.ext.solotandem.com:32768';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
-// Initial page redirecting to myFields
+/**
+ * @api {post} api/authenticate Request authentication token.
+ * @apiName Authenticate
+ * @apiGroup Authentication
+ *
+ * @apiSuccess {String} message A welcome message to the api.
+ * @apiSuccess {String} token The valid Json Web Token needed for authentication.
+ */
 router.get('/', (req, res) => {
-  console.log("FOOBAR")
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
-    callback: 'oob',
+    // TODO: this callback is not yet working, we are working with
+    // the myFields developer to configure the Oauth endpoint
+    // correctly on his end
+    callback: '/callback',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
   }
 
-  // TODO: This is insecure - we need to get a valid certificiate
+  // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
+  //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
+  //       developer, remove the rejectUnauthorized flag
+  // TODO: this may need to be changed to request.post if the myFields API endpoint changes
+  // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
-	   // After token is authorized
+    res.redirect(uri);
+
+    // After token is authorized
 	  var auth_data = qs.parse(body),
         oauth =
         {
@@ -42,11 +58,7 @@ router.get('/', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
-    res.redirect(uri)
-
-    // TODO: what do we do after they're authenticated?
-
-    /*
+    
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
@@ -58,12 +70,14 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				},
         url = host + '/node.json?';
+        console.log(body)
+      /*
       request.get({url:url, oauth:oauth, json:true}, function(e, r, body)
       {
-        console.log(body)
+        console.log(oauth)
       })        
+      */
 	  })
-    */
 	})
 });
 

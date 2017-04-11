@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
     var AppData = sequelize.define('AppData', {
         username: { type: DataTypes.STRING, allowNull: false },
+        appid: { type: DataTypes.INTEGER, allowNull: false},
         jsondata: { type: DataTypes.TEXT('long'), allowNull: true },
         image: { type: DataTypes.STRING, allowNull: true },
         geoloc: { type: DataTypes.GEOMETRY('POINT'), allowNull: true },

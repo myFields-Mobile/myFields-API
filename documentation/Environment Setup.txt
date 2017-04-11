@@ -1,15 +1,14 @@
-Environment Variables:
-AZURE_STORAGE_ACCOUNT: name of Azure Storage account
-AZURE_STORAGE_ACCESS_KEY: private key for Azure Storage
+The following environment variables will be needed for the API
+to run:
 
-OAUTH_KEY: identifier for myFields.info authentication
-OATH_SECRET: private key for myFields.info authentication
+	Environment Variables:
+	AZURE_STORAGE_ACCOUNT: name of Azure Storage account
+	AZURE_STORAGE_ACCESS_KEY: private key for Azure Storage
 
-Node Modules:
-(All can be obtained using "npm install packagename" unless specified otherwise)
+	OAUTH_KEY: identifier for myFields.info authentication
+		contact the myFields.info developer for this information
+	OATH_SECRET: private key for myFields.info authentication
+		contact the myFields.info developer for this information
 
-azure-storage
-simple-oauth2
-express
-busboy
-formidable
+After installing all dependencies, the API can be started using
+'npm start' with elevated privileges.
