@@ -50,7 +50,7 @@ router.get('/getJSON', isAuthenticated, isTypes(["Admin", "Inspector"]), functio
  * @apiName CreateAppData
  * @apiGroup AppData
  * 
- * @apiHeader {String} x-access-token Valid authentication JWT.
+ * @apiHeader {String} token Valid authentication JWT.
  * @apiParam {String} jsondata The json string containing the data to submit (optional)
  * @apiParam {String} image The URL to the location where the image is stored (S3, Azure, etc)
  * @apiParam {Double} longitude The GPS longitude (optional)
@@ -79,7 +79,7 @@ router.post('/create', isAuthenticated, function(req, res, next) {
         else {
             res.status(200).send({
                 message: "Report created."
-            })
+            });
         }
     }
 });
