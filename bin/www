@@ -26,9 +26,6 @@ var server = http.createServer(app);
  * Sequelize Model Migrations
  */
 models.sequelize.sync().then(function () {
-  /*
-  * This code is left in here for future reference, but will not be used
-  *
   models.UserType.findAll()
       .then(function(userTypes) {
         if(userTypes.length == 0) {
@@ -37,7 +34,34 @@ models.sequelize.sync().then(function () {
           models.UserType.create({title:'Farmer'});
         }
       });
-  */
+
+  models.Crop.findAll()
+    .then(function(crops) {
+      console.log(crops);
+      if(crops.length == 0) {
+        models.Crop.create({name:'Wheat'});
+        models.Crop.create({name:'Cotton'});
+        models.Crop.create({name:'Corn'});
+      }
+    });
+
+  models.Irrigation.findAll()
+    .then(function(irrigations) {
+      if(irrigations.length == 0) {
+        models.Irrigation.create({name:'Irrigation 1'});
+        models.Irrigation.create({name:'Irrigation 2'});
+        models.Irrigation.create({name:'Irrigation 3'});
+      }
+    });
+
+  models.Tillage.findAll()
+    .then(function(tillages) {
+      if(tillages.length == 0) {
+        models.Tillage.create({name:'Tillage 1'});
+        models.Tillage.create({name:'Tillage 2'});
+        models.Tillage.create({name:'Tillage 3'});
+      }
+    });
 
   /**
    * Listen on provided port, on all network interfaces.
@@ -46,7 +70,6 @@ models.sequelize.sync().then(function () {
   server.on('error', onError);
   server.on('listening', onListening);
   console.log("Server started on port " + port);
-
 });
 
 /**
