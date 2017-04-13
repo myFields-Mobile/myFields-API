@@ -1,7 +1,7 @@
 var request = require('supertest');
 var should = require('should');
 var assert = require('assert');
-// var config = require('../config.json');
+var config = require('../config.json');
 var newBlob = require('../config.json').newBlob;
 var url = config.url;
 var jwt = config.jwt;

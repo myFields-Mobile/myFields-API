@@ -39,7 +39,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/App/app.js",
+    "filename": "routes/App/app.js",
     "groupTitle": "App"
   },
   {
@@ -89,14 +89,50 @@
             "group": "Parameter",
             "type": "Double",
             "optional": false,
-            "field": "lattitude",
-            "description": "<p>the GPS lattitude (optional)</p>"
+            "field": "latitude",
+            "description": "<p>the GPS latitude (optional)</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
+    "filename": "routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "delete",
+    "url": "api/appdata/remove",
+    "title": "Remove an entry",
+    "name": "DeleteReport",
+    "group": "AppData",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the report in the table</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>A success message.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/AppData/appdata.js",
     "groupTitle": "AppData"
   },
   {
@@ -119,7 +155,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
+    "filename": "routes/AppData/appdata.js",
     "groupTitle": "AppData"
   },
   {
@@ -142,7 +178,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
+    "filename": "routes/AppData/appdata.js",
     "groupTitle": "AppData"
   },
   {
@@ -165,43 +201,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
-    "groupTitle": "AppData"
-  },
-  {
-    "type": "get",
-    "url": "api/appdata/",
-    "title": "List",
-    "name": "List_All_AppData",
-    "group": "AppData",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "x-access-token",
-            "description": "<p>Valid authentication JWT.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "array",
-            "optional": false,
-            "field": "object",
-            "description": "<p>Entire AppData table</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
+    "filename": "routes/AppData/appdata.js",
     "groupTitle": "AppData"
   },
   {
@@ -237,7 +237,43 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/AppData/appdata.js",
+    "filename": "routes/AppData/appdata.js",
+    "groupTitle": "AppData"
+  },
+  {
+    "type": "get",
+    "url": "api/appdata/",
+    "title": "List",
+    "name": "List_All_AppData",
+    "group": "AppData",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>Entire AppData table</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/AppData/appdata.js",
     "groupTitle": "AppData"
   },
   {
@@ -273,7 +309,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/App/app.js",
+    "filename": "routes/App/app.js",
     "groupTitle": "App"
   },
   {
@@ -323,7 +359,37 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Authentication/authentication.js",
+    "filename": "routes/Authentication/authentication.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
+    "url": "api/authenticate",
+    "title": "Request authentication token.",
+    "name": "Authenticate",
+    "group": "Authentication",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>A welcome message to the api.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>The valid Json Web Token needed for authentication.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/Authentication/authentication.js",
     "groupTitle": "Authentication"
   },
   {
@@ -346,7 +412,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/api.js",
+    "filename": "routes/api.js",
     "groupTitle": "Authentication"
   },
   {
@@ -402,7 +468,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Boundary/boundary.js",
+    "filename": "routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -438,7 +504,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Boundary/boundary.js",
+    "filename": "routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -474,7 +540,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Boundary/boundary.js",
+    "filename": "routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
   },
   {
@@ -523,1136 +589,8 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Boundary/boundary.js",
+    "filename": "routes/Boundary/boundary.js",
     "groupTitle": "Boundary"
-  },
-  {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/documentation/main.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_documentation_main_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_documentation_main_js",
-    "name": ""
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/readable-stream/node_modules/util-deprecate/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_readable_stream_node_modules_util_deprecate_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_readable_stream_node_modules_util_deprecate_browser_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/readable-stream/node_modules/util-deprecate/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_readable_stream_node_modules_util_deprecate_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_readable_stream_node_modules_util_deprecate_browser_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/azure-storage/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_azure_storage_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/browser.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_browser_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/debug.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_debug_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node_modules/ms/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node_modules/ms/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node_modules/ms/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/debug/node_modules/ms/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_debug_node_modules_ms_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/aws-sign2/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_aws_sign2_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "private",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Private"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
-  },
-  {
-    "type": "",
-    "url": "public",
-    "title": "",
-    "version": "0.0.0",
-    "filename": "myFields-API/node_modules/simple-oauth2/node_modules/request/node_modules/har-validator/node_modules/commander/index.js",
-    "group": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "groupTitle": "C__Users_Jonathan_GitHub_myFields_API_node_modules_simple_oauth2_node_modules_request_node_modules_har_validator_node_modules_commander_index_js",
-    "name": "Public"
   },
   {
     "type": "get",
@@ -1687,7 +625,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Crop/crop.js",
+    "filename": "routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -1723,7 +661,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Crop/crop.js",
+    "filename": "routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -1759,7 +697,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Crop/crop.js",
+    "filename": "routes/Crop/crop.js",
     "groupTitle": "Crop"
   },
   {
@@ -1795,7 +733,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -1872,7 +810,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -1908,7 +846,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -1944,7 +882,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -1980,7 +918,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -2016,7 +954,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -2052,7 +990,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Field/field.js",
+    "filename": "routes/Field/field.js",
     "groupTitle": "Field"
   },
   {
@@ -2094,7 +1032,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Images/images.js",
+    "filename": "routes/Images/images.js",
     "groupTitle": "Images"
   },
   {
@@ -2131,19 +1069,12 @@
             "optional": false,
             "field": "blob",
             "description": "<p>The name of the blob to download</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "output",
-            "description": "<p>File name to save blob to locally</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Images/images.js",
+    "filename": "routes/Images/images.js",
     "groupTitle": "Images"
   },
   {
@@ -2191,7 +1122,49 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Images/images.js",
+    "filename": "routes/Images/images.js",
+    "groupTitle": "Images"
+  },
+  {
+    "type": "post",
+    "url": "api/images/addBlob",
+    "title": "addBlob",
+    "name": "addBlob_Images",
+    "group": "Images",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "optional": false,
+            "field": "JWT",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "container",
+            "description": "<p>The name of the Azure Storage container (should be provided by app calling API)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "filename",
+            "description": "<p>The filename of the blob to add</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/Images/images.js",
     "groupTitle": "Images"
   },
   {
@@ -2227,7 +1200,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2263,7 +1236,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2299,7 +1272,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2335,7 +1308,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2371,7 +1344,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2407,7 +1380,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2443,7 +1416,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2479,43 +1452,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
-    "groupTitle": "Inspection"
-  },
-  {
-    "type": "get",
-    "url": "api/inspection/requested",
-    "title": "List all active inspections requested by the user",
-    "name": "ListInspection",
-    "group": "Inspection",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "x-access-token",
-            "description": "<p>Valid authentication JWT.</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "array",
-            "optional": false,
-            "field": "object",
-            "description": "<p>inspection types.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2551,7 +1488,43 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
+    "groupTitle": "Inspection"
+  },
+  {
+    "type": "get",
+    "url": "api/inspection/requested",
+    "title": "List all active inspections requested by the user",
+    "name": "ListInspection",
+    "group": "Inspection",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-access-token",
+            "description": "<p>Valid authentication JWT.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "array",
+            "optional": false,
+            "field": "object",
+            "description": "<p>inspection types.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2605,7 +1578,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Inspection/inspection.js",
+    "filename": "routes/Inspection/inspection.js",
     "groupTitle": "Inspection"
   },
   {
@@ -2641,7 +1614,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Irrigation/irrigation.js",
+    "filename": "routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -2677,7 +1650,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Irrigation/irrigation.js",
+    "filename": "routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -2713,7 +1686,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Irrigation/irrigation.js",
+    "filename": "routes/Irrigation/irrigation.js",
     "groupTitle": "Irrigation"
   },
   {
@@ -2749,7 +1722,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Tillage/tillage.js",
+    "filename": "routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -2785,7 +1758,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Tillage/tillage.js",
+    "filename": "routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -2821,7 +1794,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Tillage/tillage.js",
+    "filename": "routes/Tillage/tillage.js",
     "groupTitle": "Tillage"
   },
   {
@@ -2885,7 +1858,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Users/users.js",
+    "filename": "routes/Users/users.js",
     "groupTitle": "User"
   },
   {
@@ -2921,7 +1894,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Users/users.js",
+    "filename": "routes/Users/users.js",
     "groupTitle": "User"
   },
   {
@@ -2971,7 +1944,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "myFields-API/routes/Users/users.js",
+    "filename": "routes/Users/users.js",
     "groupTitle": "User"
   }
 ]
