@@ -1,4 +1,5 @@
 var express = require('express');
+var ImageUpload = require( "express-azure-image-upload" );
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
@@ -145,7 +146,7 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 				}
 			};
 			
-			blobSvc.createBlockBlobFromStream(req.body.container, req.body.filename, part, size, onError);
+			blobSvc.createBlockBlobFromStream(req.body.container, filename, part, size, onError);
 		} 
 		else {
 			form.handlePart(part);
@@ -153,4 +154,23 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 	});
 	form.parse(req);
 	res.status(200).send({message: "Successfully uploaded blob."})
+});
+
+/**
+ * @api {post} api/images/uploadImage Create
+ * @apiName uploadImages
+ * @apiGroup Images
+ *
+ * @apiParam {String} storageAccount The azure storage account name
+ * @apiParam {String} storageKey The Azure storage account key
+ * @apiParam {String} container The Azure storage container
+ * @apiParam {String} image The image to upload
+ *
+ * @apiSuccess {Object} user The new user object.
+ */
+router.post('/uploadImage', isAuthenticated, function (req, res, next)
+{
+    var imageUpload = new ImageUpload( req.body.storageAccount, req.body.storageKey, req.body.container );
+
+    return imageUpload.handler;
 });
