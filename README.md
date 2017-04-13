@@ -1,4 +1,4 @@
-MyFields-API
+#MyFields-API
 
 A node.js and express based API for authentication and data control of all Kansas State 
 Research and Extension applications. This API is designed to be a general purpose API 
@@ -7,12 +7,12 @@ for any myFields application.
 The myFields team uses Microsoft Azure for this project. Contact Brian McCornack
 (mccornac AT ksu.edu) for access.
 
-PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE.
+**PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE.**
 We are currently resolving issues with the Oauth authentication. Once these issues are
 resolved, all of the signed requests that are currently using JsonWebToken will need
 to be modified to use Oauth.
 
-The usage model is as follows:
+##Usage Model:
 
 	0. Before using the application, an entry for the app should be created in the App 
 		table. This table wil store the app's name, which must be unique, and if the app
@@ -37,8 +37,21 @@ from documentation in the code using APIdocs, and it can be updated using that u
 You can also find brief instructions on setting up an environment to run this API in
 the documentation folder.
 
-Links:
+##Testing:
 
-Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
+This API is tested using Mocha. To run the tests, make sure you have the npm Mocha package
+installed, then run Mocha from the root directory. **The API must be running and accessible
+from the URL in test/config.json**. 
 
-Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
+[comment]: # (TODO: remove this once authentication works)
+At this time most of these tests will fail, because
+authentication is not complete.
+
+##Continuing Work:
+
+
+
+##Reference Links:
+*Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
+*Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
+*Multiparty (Used for image uploading): https://www.npmjs.com/package/multiparty
