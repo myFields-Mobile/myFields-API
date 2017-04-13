@@ -29,7 +29,12 @@ to be modified to use Oauth.
 	3. If the data is to be published to myFields, you should use the myFields.info API
 		to do so. The myFields.info API is not under the same developer as the myFields
 		mobile API - speak to the myFields team if you will be working with the
-		myFields.info developer.
+		myFields.info API.
+
+	Note that the 'active' field in AppData is intended to be a general purpose
+	flag to indicate a boolean state of that data. For the purpose of the reporting
+	app, for example, the active field indicates if the data has been verified as
+	correct by an agent.
 
 Detailed documentation on API methods can be found in the code, or you can view it by 
 opening documentation/index.html in your browser. This documentation is auto-generated
@@ -49,7 +54,16 @@ authentication is not complete.
 
 ## Continuing Work:
 
+First priority should be completing authentication. At this time, we believe our authentication
+code is correct, but there is an issue with the configuration of the myFields.info Oauth provider.
+We are currently working to fix these issues.
 
+Once the Oauth works correctly, we should replace all usages of the JSONWebToken with the Oauth
+token and secret, and replace all usages of the authentication middleware with calls to the
+myFields.info API.
+
+Other than authentication, the API is currently usable. Further improvement should include
+the ability to upload data from this API to the myFields database.
 
 ## Reference Links:
 * Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
