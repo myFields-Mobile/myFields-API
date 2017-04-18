@@ -1,5 +1,5 @@
 var express = require('express');
-var ImageUpload = require( "express-azure-image-upload" );
+var ImageUpload = require( "express-azure-image-upload" ); // This will not be necessary if uploadImage is deleted
 var models  = require('../../models');
 var router = express.Router({mergeParams:true});
 var azure = require('azure-storage');
@@ -120,6 +120,12 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
 	}
 });
 
+/*
+	TODO: Fix one of the two post methods below to be able to upload a blob to Azure and get a URL to that blob returned
+	then choose one. Both are close but neither work 100%
+	Once that is done, fix App/www/reportingForm/reportForm.js
+*/
+
 /**
  * @api {post} api/images/addBlob addBlob
  * @apiName addBlob Images
@@ -131,6 +137,14 @@ router.post('/deleteBlob', isAuthenticated, isTypes(['Admin']), function(req, re
  */
 router.post('/addBlob', isAuthenticated, function(req, res, next)
 {
+	/*
+		Known issues with this post: How to get URL returned
+	 	http://willi.am/blog/2014/07/09/azure-blob-storage-and-node-all-together/
+	 	https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
+	 	http://azure.github.io/azure-sdk-for-node/azure-storage-legacy/latest/BlobService.html#createBlobBlockFromStream
+	 	http://willi.am/blog/2014/07/02/azure-blob-storage-and-node-creating-blobs/
+	 */
+
 	if(!req.body.container || !req.body.input){
 		res.status(500).send({message: "Missing post parameters."});
 	}
@@ -170,6 +184,12 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
  */
 router.post('/uploadImage', isAuthenticated, function (req, res, next)
 {
+	/*
+		This one seems very nice and simple, but not sure how to pass in the 'image' data property. Can't find a lot
+		of documentation.
+	 	https://www.npmjs.com/package/express-azure-image-upload
+	 	https://github.com/projectweekend/express-azure-image-upload
+	 */
     var imageUpload = new ImageUpload( req.body.storageAccount, req.body.storageKey, req.body.container );
 
     return imageUpload.handler;
