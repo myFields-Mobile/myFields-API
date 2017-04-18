@@ -9,6 +9,18 @@ var isTypes = require('../Authentication/authenticationMiddlewear').isTypes;
 var blobSvc = azure.createBlobService();
 
 /**
+ * @api {get} api/images/ Gets root of images API
+ * @apiName Images
+ * @apiGroup Images
+ *
+ * @apiSuccess status message; this endpoint doesn't actually do anything
+ */
+router.get('/', isAuthenticated, function(req, res, next)
+{
+	res.status(200).send({message: "Root of myFields image handling API"});
+});
+
+/**
  * @api {post} api/images/listBlobs ListBlobs
  * @apiName ListBlobs Images
  * @apiGroup Images
@@ -170,6 +182,7 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 	res.status(200).send({message: "Successfully uploaded blob."})
 });
 
+<<<<<<< HEAD
 /**
  * @api {post} api/images/uploadImage Create
  * @apiName uploadImages
@@ -194,3 +207,6 @@ router.post('/uploadImage', isAuthenticated, function (req, res, next)
 
     return imageUpload.handler;
 });
+=======
+module.exports = router;
+>>>>>>> dev-master
