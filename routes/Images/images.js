@@ -17,7 +17,7 @@ var blobSvc = azure.createBlobService();
 router.get('/', isAuthenticated, function(req, res, next)
 {
 	res.status(200).send({message: "Root of myFields image handling API"});
-}
+});
 
 /**
  * @api {post} api/images/listBlobs ListBlobs
