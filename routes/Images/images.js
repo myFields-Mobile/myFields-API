@@ -182,7 +182,6 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 	res.status(200).send({message: "Successfully uploaded blob."})
 });
 
-<<<<<<< HEAD
 /**
  * @api {post} api/images/uploadImage Create
  * @apiName uploadImages
@@ -207,6 +206,6 @@ router.post('/uploadImage', isAuthenticated, function (req, res, next)
 
     return imageUpload.handler;
 });
-=======
+
 module.exports = router;
->>>>>>> dev-master
+
