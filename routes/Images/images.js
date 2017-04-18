@@ -166,3 +166,5 @@ router.post('/addBlob', isAuthenticated, function(req, res, next)
 	form.parse(req);
 	res.status(200).send({message: "Successfully uploaded blob."})
 });
+
+module.exports = router;
