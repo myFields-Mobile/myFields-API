@@ -6,6 +6,8 @@ var router = express.Router({mergeParams:true});
 
 'use strict';
 
+// Note the oauth consumer key and secret must be provided here
+// or set as environment variables
 var oauth_consumer_key = 'key';//process.env.OAUTH_KEY;
 var oauth_consumer_secret = 'secret';//process.env.OAUTH_SECRET;
 
@@ -70,13 +72,10 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				},
         url = host + '/node.json?';
-        console.log(body)
-      /*
       request.get({url:url, oauth:oauth, json:true}, function(e, r, body)
       {
         console.log(oauth)
-      })        
-      */
+      }) 
 	  })
 	})
 });
