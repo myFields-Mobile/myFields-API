@@ -23,7 +23,7 @@ var authorize_path= '/oauth/authorize/';
  * @apiGroup Authentication
  *
  * @apiSuccess {String} message A welcome message to the api.
- * @apiSuccess {String} token The valid Json Web Token needed for authentication.
+ * @apiSuccess {String} oauth The Oauth object containing the tokens used to sign requests
  */
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
@@ -60,6 +60,8 @@ router.get('/', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
+
+    console.log(oauth);
     
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
@@ -70,17 +72,15 @@ router.get('/', (req, res) => {
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
-				},
+				};
         url = host + '/node.json?';
-      request.get({url:url, oauth:oauth, json:true}, function(e, r, body)
-      {
-        console.log(oauth)
-      }) 
 	  })
 	})
 });
 
 router.get('/callback', (req, res) => {
+  console.log("Oauth callback")
+  console.log(res.body)
   res.send("Success")
 });
 
