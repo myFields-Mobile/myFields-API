@@ -60,9 +60,9 @@ router.get('/', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
-
-    console.log(oauth);
     
+    console.log("token authorized")
+
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
@@ -72,8 +72,10 @@ router.get('/', (req, res) => {
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
-				};
-        url = host + '/node.json?';
+				},
+        url = host + "/node.json?";
+      console.log("line 77" + r)
+      console.log("line 78" + body)
 	  })
 	})
 });
