@@ -25,8 +25,7 @@ var authorize_path= '/oauth/authorize/';
  * @apiName Authenticate
  * @apiGroup Authentication
  *
- * @apiSuccess {String} message A welcome message to the api.
- * @apiSuccess {String} oauth The Oauth object containing the tokens used to sign requests
+ * @apiSuccess redirected to callback
  */
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
@@ -79,10 +78,17 @@ router.get('/', (req, res) => {
 	})
 });
 
+/**
+* @api {GET} api/authenticate/callback callback after oauth process is complete
+* @apiName Authenticate Callback
+* @apiGroup Authentication
+*
+* @apiSuccess {object} user_oauth signed in user's oauth credentials
+*/
 router.get('/callback', (req, res) => {
-  if(user_oauth)
+  console.log(req)
+  if(user_oauth.token == 1)
   {
-    console.log(user_oauth.token_secret)
     res.status(200).send(user_oauth)
   }
   else 
