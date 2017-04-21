@@ -86,7 +86,10 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  if(user_oauth.token == qs.parse(req.search).token)
+  var req_search = qs.parse(req.search);
+  console.log(req_search)
+  console.log(req_search.token)
+  if(user_oauth.token == 1)
   {
     res.status(200).send(user_oauth)
   }
