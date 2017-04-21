@@ -73,12 +73,6 @@ router.get('/', (req, res) => {
 				},
         url = host + "/node.json?";
 	  })
-
-    //token authorized
-    res.status(200).send({
-          message: "Authentication successful",
-          oauth: oauth
-        });
 	})
 });
 
