@@ -78,7 +78,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/callback', (req, res) => {
-  res.send(200).message("test")
+  console.log(oauth)
+  console.log("in callback")
 });
 
 /*
