@@ -80,7 +80,7 @@ router.get('/', (req, res) => {
 
 router.get('/callback', (req, res) => {
   console.log("Oauth callback")
-  console.log(res.body)
+  //console.log(res.body)
   res.send("Success")
 });
 
