@@ -71,15 +71,15 @@ router.get('/', (req, res) => {
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
-				};
+				},
+        url = host + "/node.json?";
+        console.log("line 76 oauth token secret: " oauth.token_secret)
 	  })
-    console.log("line 76 oauth: " + oauth)
 	})
 });
 
 router.get('/callback', (req, res) => {
-  console.log(oauth)
-  console.log("in callback")
+  res.send(200)
 });
 
 /*
