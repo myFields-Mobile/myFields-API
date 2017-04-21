@@ -4,6 +4,9 @@ var request = require('request');
 var qs = require('querystring');
 var router = express.Router({mergeParams:true});
 
+// TODO: get help storing oauth for individual users
+var user_oauth;
+
 'use strict';
 
 // Note the oauth consumer key and secret must be provided here
@@ -72,73 +75,19 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				};
 	  })
-    console.log("line 76 oauth token secret: " + oauth.token_secret)
+    user_oauth = oauth;
 	})
 });
 
 router.get('/callback', (req, res) => {
-  res.send("Success")
-});
-
-/*
-const express = require('express');
-var jwt    = require('jsonwebtoken');
-var models  = require('../../models');
-var config = require('../../config/config');
-var router = express.Router({mergeParams:true});
-
-/**
- * @api {post} api/authenticate Request authentication token.
- * @apiName Authenticate
- * @apiGroup Authentication
- *
- * @apiParam {String} email The users email address.
- * @apiParam {String} password The users password.
- *
- * @apiSuccess {String} message A welcome message to the api.
- * @apiSuccess {String} token The valid Json Web Token needed for authentication.
- */
- /*
-router.post('/', function(req, res, next) {
-  if(!req.body.email || !req.body.password) {
-    res.status(500).send({
-      "message": "No user with the following email found"
-    })
-  } else {
-    // Find first user with matching email
-    models.User.findOne({
-      where: {
-        email: req.body.email
-      },
-      include: [models.UserType]
-    }).then(function(matchingUser) {
-      if(!matchingUser) {
-        res.status(500).send({
-          "message": "No user with the following email found"
-        });
-      } else if(!matchingUser.validPassword(req.body.password)){
-        res.status(500).send({
-          "message": "Password is incorrect"
-        })
-      } else {
-        var userTypes = [];
-        matchingUser.UserTypes.forEach(function(userType) {
-          userTypes.push(userType.title);
-        });
-        var token = jwt.sign({
-          id: matchingUser.id,
-          types: userTypes
-        }, config.secret, {
-          expiresInMinutes: 40320 // expires in 24 hours
-        });
-        res.status(200).send({
-          message: "Authentication successful",
-          token: token,
-          user: matchingUser.toPublicJSON()
-        });
-      }
-    });
+  if(user_oauth)
+  {
+    res.status(200).send(user_oauth)
+  }
+  else 
+  {
+    res.status(403).send("Must log in using /api/authenticate")
   }
 });
-*/
+
 module.exports = router;
