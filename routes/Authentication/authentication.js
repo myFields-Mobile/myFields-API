@@ -63,7 +63,6 @@ router.get('/', (req, res) => {
 
     // authorize token
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
-      console.log("line 66 body: " + body)
 			var perm_data = qs.parse(body),
         oauth =
 				{
@@ -74,12 +73,13 @@ router.get('/', (req, res) => {
 				},
         url = host + "/node.json?";
 	  })
-    console.log("line 78 oauth token secret: " oauth.token_secret)
+    console.log("line 76 oauth token secret: " + oauth.token_secret)
 	})
 });
 
 router.get('/callback', (req, res) => {
-  res.send(200).message("in callback")
+  console.log("Oauth callback")
+  res.send("Success")
 });
 
 /*
