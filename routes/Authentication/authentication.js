@@ -8,8 +8,8 @@ var router = express.Router({mergeParams:true});
 
 // Note the oauth consumer key and secret must be provided here
 // or set as environment variables
-var oauth_consumer_key = 'key';//process.env.OAUTH_KEY;
-var oauth_consumer_secret = 'secret';//process.env.OAUTH_SECRET;
+var oauth_consumer_key = process.env.OAUTH_KEY;
+var oauth_consumer_secret = process.env.OAUTH_SECRET;
 
 // TODO: this is a non-production endpoint and will need to be changed when the app is ready for production
 var host = 'https://svcs.ext.solotandem.com:32768';
