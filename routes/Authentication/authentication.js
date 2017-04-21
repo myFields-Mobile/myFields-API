@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
 
-    // After token is authorized
+    // consumer key and secret authorized
 	  var auth_data = qs.parse(body),
         oauth =
         {
@@ -60,11 +60,9 @@ router.get('/', (req, res) => {
         	verifier: auth_data.oauth_verifier
         },
         url = host + token_path;
-    
-    console.log("token authorized")
 
+    // authorize token
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
-			// ready to make signed requests on behalf of the user
 			var perm_data = qs.parse(body),
         oauth =
 				{
@@ -74,9 +72,13 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				},
         url = host + "/node.json?";
-      console.log("line 77" + r)
-      console.log("line 78" + body)
 	  })
+
+    //token authorized
+    res.status(200).send({
+          message: "Authentication successful",
+          oauth: oauth
+        });
 	})
 });
 
