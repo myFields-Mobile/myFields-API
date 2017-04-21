@@ -61,6 +61,8 @@ router.get('/', (req, res) => {
         },
         url = host + token_path;
 
+    console.log("line 64")
+
     // authorize token
 		request.get({url:url, oauth:oauth}, function (e, r, body) {
 			var perm_data = qs.parse(body),
@@ -73,6 +75,8 @@ router.get('/', (req, res) => {
 				},
         url = host + "/node.json?";
 	  })
+
+    console.log("line 79")
 	})
 });
 
