@@ -73,13 +73,13 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				},
         url = host + "/node.json?";
-        console.log("line 76 oauth token secret: " oauth.token_secret)
 	  })
+    console.log("line 78 oauth token secret: " oauth.token_secret)
 	})
 });
 
 router.get('/callback', (req, res) => {
-  res.send(200)
+  res.send(200).message("in callback")
 });
 
 /*
