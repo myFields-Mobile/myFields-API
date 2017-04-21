@@ -78,7 +78,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/callback', (req, res) => {
-  console.log("Oauth callback")
+  console.log("line 81 token secret: " + oauth.token_secret)
   res.send("Success")
 });
 
