@@ -87,7 +87,7 @@ router.get('/', (req, res) => {
 */
 router.get('/callback', (req, res) => {
   console.log(req)
-  if(user_oauth.token == 1)
+  if(user_oauth.token == req.url.query)
   {
     res.status(200).send(user_oauth)
   }
