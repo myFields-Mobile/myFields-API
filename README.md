@@ -77,6 +77,7 @@ the ability to upload data from this API to the myFields database.
 * Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
 * Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
 * Multiparty (Used for image uploading): https://www.npmjs.com/package/multiparty
+* Client-Sessions: https://github.com/mozilla/node-client-sessions
 
 ## myFields
 
