@@ -14,6 +14,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// session set up
+var sessions = require("client-sessions");
+app.use(sessions({
+  cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
+  secret: process.env.cookie_secret, // should be a large unguessable string
+  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+  activeDuration: 1000 * 60 * 5 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+}));
+
+
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -67,6 +78,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;

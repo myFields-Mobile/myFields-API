@@ -74,7 +74,7 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				};
 	  })
-    // TODO: this is a hack
+    // TODO: This is a bad hack! This needs to be a session variable!
     user_oauth = oauth;
 	})
 });
@@ -87,7 +87,6 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  // TODO: store req.query.oauth in session variable
   if(user_oauth.token == req.query.oauth_token)
   {
     req.get({url:host+"/user/me", oauth:user_oauth}, function(e, r, body){
