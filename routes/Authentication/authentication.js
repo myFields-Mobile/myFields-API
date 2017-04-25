@@ -90,7 +90,7 @@ router.get('/callback', (req, res) => {
   {
     req.get({url:host+"user/me", oauth:user_oauth}, function(e, r, body){
       console.log(e);
-      console.log("body: " body);
+      console.log("body: " + body);
     });
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
