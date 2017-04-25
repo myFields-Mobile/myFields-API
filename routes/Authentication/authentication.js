@@ -74,6 +74,8 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				};
 	  })
+    // TODO: this is a hack
+    user_oauth = oauth;
 	})
 });
 
