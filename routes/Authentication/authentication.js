@@ -75,9 +75,9 @@ router.get('/', (req, res) => {
 				};
 	  })
     user_oauth = oauth;
-    for key in user_oauth {
+    Object.keys(user_oauth).forEach(function(key){
       console.log(key, user_oauth[key])
-    }
+    })
 	})
 });
 
@@ -94,9 +94,10 @@ router.get('/callback', (req, res) => {
   {
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
-    for key in req.query {
-      console.log(key, req.query[key])
-    }
+    for Object.keys(req.query).forEach(function(key)
+    {
+       console.log(key, req.query[key])
+     })
   }
   else 
   {
