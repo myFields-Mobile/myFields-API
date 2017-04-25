@@ -88,7 +88,10 @@ router.get('/callback', (req, res) => {
   // TODO: store req.query.oauth in session variable
   if(user_oauth.token == req.query.oauth_token)
   {
-    req.get(url:host+"user/me", oauth:user_oauth);
+    req.get({url:host+"user/me", oauth:user_oauth}, function(e, r, body){
+      console.log(e);
+      console.log("body: " body);
+    });
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
   }
