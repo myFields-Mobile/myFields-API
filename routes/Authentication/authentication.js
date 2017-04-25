@@ -74,10 +74,6 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				};
 	  })
-    user_oauth = oauth;
-    Object.keys(user_oauth).forEach(function(key){
-      console.log(key, user_oauth[key])
-    })
 	})
 });
 
@@ -89,15 +85,12 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  // store req.query.oauth in session variable
+  // TODO: store req.query.oauth in session variable
   if(user_oauth.token == req.query.oauth_token)
   {
+    req.get(url:host+"user/me", oauth:user_oauth);
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
-    Object.keys(req.query).forEach(function(key)
-    {
-       console.log(key, req.query[key])
-     })
   }
   else 
   {
