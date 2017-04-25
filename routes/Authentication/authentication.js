@@ -11,8 +11,8 @@ var user_oauth;
 
 // Note the oauth consumer key and secret must be provided here
 // or set as environment variables
-var oauth_consumer_key = process.env.OAUTH_KEY;
-var oauth_consumer_secret = process.env.OAUTH_SECRET;
+const oauth_consumer_key = process.env.OAUTH_KEY;
+const oauth_consumer_secret = process.env.OAUTH_SECRET;
 
 // TODO: this is a non-production endpoint and will need to be changed when the app is ready for production
 var host = 'https://svcs.ext.solotandem.com:32768';
@@ -75,6 +75,9 @@ router.get('/', (req, res) => {
 				};
 	  })
     user_oauth = oauth;
+    for key in user_oauth {
+      console.log(key, user_oauth[key])
+    }
 	})
 });
 
@@ -86,9 +89,14 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
+  // store req.query.oauth in session variable
   if(user_oauth.token == req.query.oauth_token)
   {
+    // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
+    for key in req.query {
+      console.log(key, req.query[key])
+    }
   }
   else 
   {
