@@ -19,12 +19,11 @@ var sessions = require("client-sessions");
 var client_session = sessions(process.env.cookie_secret,
   {
     cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
-    secret: process.env.cookie_secret, // should be a large unguessable string
-    duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
-    activeDuration: 1000 * 60 * 15 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
+  secret: process.env.cookie_secret, // should be a large unguessable string
+  duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
+  activeDuration: 1000 * 60 * 15 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
   });
-app.use(client_session({
-  
+app.use(client_session);
 
 
 // uncomment after placing your favicon in /public
