@@ -67,10 +67,11 @@ router.get('/', (req, res) => {
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
 				};
-        console.log("line 70: " + oauth);
+        console.log("line 70: " + oauth.token);
 	  })
-    console.log("line 72: " + oauth);
+    console.log("line 72: " + oauth.token);
     req.oauth_cookie.oauth = oauth;
+    console.log("line 74: " + req.oauth_cookie.oauth.token);
 	})
 });
 
