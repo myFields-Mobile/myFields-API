@@ -67,11 +67,10 @@ router.get('/', (req, res) => {
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
 				};
-        console.log("line 70: " + oauth.token);
 	  })
-    console.log("line 72: " + oauth.token);
+    // save oauth in session cookie
     req.oauth_cookie.oauth = oauth;
-    console.log("line 74: " + req.oauth_cookie.oauth.token);
+    console.log("oauth_cookie set: " + req.oauth_cookie.oauth.token);
 	})
 });
 
@@ -83,14 +82,11 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  console.log(req.oauth_cookie);
-  console.log(req.oauth_cookie.oauth);
+  console.log("in callback cookie " + req.oauth_cookie);
+  console.log("in callback cookie oauth: " + req.oauth_cookie.oauth);
+  console.log("in callback cookie oauth token: " + req.oauth_cookie.oauth.token);
   if(req.oauth_cookie.oauth.token == req.query.oauth_token)
   {
-    req.get({url:host+"/user/me", oauth:user_oauth}, function(e, r, body){
-      console.log(e);
-      console.log("body: " + body);
-    });
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
   }
