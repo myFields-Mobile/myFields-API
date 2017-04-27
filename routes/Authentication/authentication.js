@@ -80,7 +80,7 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  if(req.oauth_cookie.token == req.query.oauth_token)
+  if(req.oauth_cookie.oauth.token == req.query.oauth_token)
   {
     req.get({url:host+"/user/me", oauth:user_oauth}, function(e, r, body){
       console.log(e);
