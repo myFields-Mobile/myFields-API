@@ -16,8 +16,8 @@ app.set('view engine', 'jade');
 
 // session set up
 var sessions = require("client-sessions");
-var cs = sessions(process.env.cookie_secret);
-app.use(cs({
+var client_session = sessions(process.env.cookie_secret);
+app.use(client_session({
   cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
   secret: process.env.cookie_secret, // should be a large unguessable string
   duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
