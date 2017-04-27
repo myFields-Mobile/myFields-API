@@ -4,9 +4,6 @@ var request = require('request');
 var qs = require('querystring');
 var router = express.Router({mergeParams:true});
 
-// TODO: get help storing oauth for individual users
-var user_oauth;
-
 'use strict';
 
 // Note the oauth consumer key and secret must be provided here
@@ -30,9 +27,6 @@ var authorize_path= '/oauth/authorize/';
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
-    // TODO: this callback is not yet working, we are working with
-    // the myFields developer to configure the Oauth endpoint
-    // correctly on his end
     callback: '/callback',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
@@ -74,8 +68,7 @@ router.get('/', (req, res) => {
           token_secret: perm_data.oauth_token_secret
 				};
 	  })
-    // TODO: This is a bad hack! This needs to be a session variable!
-    user_oauth = oauth;
+    req.oauth_cookie.oauth = oauth;
 	})
 });
 
@@ -87,7 +80,7 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  if(user_oauth.token == req.query.oauth_token)
+  if(req.oauth_cookie.token == req.query.oauth_token)
   {
     req.get({url:host+"/user/me", oauth:user_oauth}, function(e, r, body){
       console.log(e);
