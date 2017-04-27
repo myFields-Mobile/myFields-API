@@ -16,6 +16,7 @@ app.set('view engine', 'jade');
 
 // session set up
 var sessions = require("client-sessions");
+console.log('secret', process.env.COOKIE_SECRET);
 app.use(sessions({
   cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
   secret: process.env.COOKIE_SECRET, // should be a large unguessable string
