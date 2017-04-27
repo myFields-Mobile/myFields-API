@@ -18,7 +18,7 @@ app.set('view engine', 'jade');
 var sessions = require("client-sessions");
 app.use(sessions({
   cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
-  secret: "AKJVA987ADSFNjl;adfo2023;ADSF;AAQWEOUVX", // should be a large unguessable string
+  secret: process.env.COOKIE_SECRET, // should be a large unguessable string
   duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
   activeDuration: 1000 * 60 * 15 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
 }));
