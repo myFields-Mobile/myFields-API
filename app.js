@@ -17,7 +17,14 @@ app.set('view engine', 'jade');
 // session set up
 app.use(session({
   //cookieName: 'oauth_cookie', // cookie name dictates the key name added to the request object
-  secret: process.env.COOKIE_SECRET // should be a large unguessable string
+  secret: process.env.COOKIE_SECRET, // should be a large unguessable string
+  resave: false,
+  saveUninitialized: true,
+  cookie:
+  {
+    // TODO: this needs to be set to true for production
+    secure: false
+  }
 }));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
