@@ -69,7 +69,7 @@ router.get('/', (req, res) => {
 				};
 	  })
     // save oauth in session cookie
-    req.oauth_cookie.oauth = oauth;
+    req.session_state.oauth = oauth;
 	})
 });
 
@@ -82,7 +82,7 @@ router.get('/', (req, res) => {
 */
 router.get('/callback', (req, res) => {
   // TODO: getting this from the cookie doesn't work yet
-  if(req.oauth_cookie.oauth.token == req.query.oauth_token)
+  if(req.session_state.oauth.token == req.query.oauth_token)
   {
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send(user_oauth)
