@@ -82,6 +82,7 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
+  console.log("cookie: " + req.session);
   console.log("cookie val: " + req.session.oauth);
   console.log("cookie val token: " + req.session.oauth.token);
   // TODO: getting this from the cookie doesn't work yet
