@@ -43,16 +43,7 @@ router.get('/', (req, res) => {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
 	  
-    // consumer key and secret authorized
-	  var auth_data = qs.parse(body),
-        oauth =
-        {
-        	consumer_key: oauth_consumer_key,
-        	consumer_secret: oauth_consumer_secret,
-        	token: auth_data.oauth_token,
-        	token_secret: req_data.oauth_token_secret,
-        	verifier: auth_data.oauth_verifier
-        };
+    
     // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
@@ -67,12 +58,21 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res) => {
+router.get('/callback', (req, res, body) => {
+    // consumer key and secret authorized
+    var auth_data = qs.parse(body);
+    var oauth =
+        {
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: auth_data.oauth_token,
+          token_secret: req_data.oauth_token_secret,
+          verifier: auth_data.oauth_verifier
+        };
 
     // authorize token
     request.get({url:host+token_path, oauth:oauth}, function (e, r, body) {
         var perm_data = qs.parse(body);
-        console.log(body, perm_data, perm_data.oauth_token)
         var oauth =
         {
           consumer_key: oauth_consumer_key,
