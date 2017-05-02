@@ -44,7 +44,7 @@ router.get('/', (req, res) => {
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
-  }
+  })
 });
 
 /**
