@@ -72,7 +72,7 @@ router.get('/callback', (req, res) => {
     // authorize token
     request.get({url:host+token_path, oauth:oauth}, function (e, r, body) {
         var perm_data = qs.parse(body);
-        console.log(perm_data, perm_data.oauth_token)
+        console.log(body, perm_data, perm_data.oauth_token)
         var oauth =
         {
           consumer_key: oauth_consumer_key,
