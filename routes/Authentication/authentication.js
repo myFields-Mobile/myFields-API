@@ -17,12 +17,6 @@ var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
-var oauth = {
-  callback: '/callback',
-  consumer_key: oauth_consumer_key,
-  consumer_secret:  oauth_consumer_secret
-}
-
 /**
  * @api {post} api/authenticate Request authentication token.
  * @apiName Authenticate
@@ -32,6 +26,11 @@ var oauth = {
  */
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
+  var oauth = {
+    callback: '/callback',
+    consumer_key: oauth_consumer_key,
+    consumer_secret:  oauth_consumer_secret
+  }
 
   // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
@@ -42,13 +41,10 @@ router.get('/', (req, res) => {
   {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
-	  
-    
-    // Redirect user to authorize uri
+	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
-
-	})
+  }
 });
 
 /**
@@ -59,38 +55,42 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res, body) => {
-    // consumer key and secret authorized
-    var auth_data = qs.parse(body);
-    var oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: auth_data.oauth_token,
-          token_secret: req_data.oauth_token_secret,
-          verifier: auth_data.oauth_verifier
-        };
+  // consumer key and secret authorized
+  var auth_data = qs.parse(body),
+      oauth =
+      {
+        consumer_key: oauth_consumer_key,
+        consumer_secret: oauth_consumer_secret,
+        token: auth_data.oauth_token,
+        token_secret: req_data.oauth_token_secret,
+        verifier: auth_data.oauth_verifier
+      },
+      url = host + token_path;
 
-    // authorize token
-    request.get({url:host+token_path, oauth:oauth}, function (e, r, body) {
-        var perm_data = qs.parse(body);
-        var oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: perm_data.oauth_token,
-          token_secret: perm_data.oauth_token_secret
-        };
-        if(!oauth.token)
-        {
-          res.status(403).send("Must log in using /api/authenticate")
-        }
-        else 
-        {
-          // TODO: will also need to request their user id and send it with their oauth token
-          // TODO: store in a cookie
-          res.status(200).send("Success")
-        }
-    })
+  // authorize token
+  request.get({url:url, oauth:oauth}, function (e, r, body) {
+    var perm_data = qs.parse(body),
+      oauth =
+      {
+        consumer_key: oauth_consumer_key,
+        consumer_secret: oauth_consumer_secret,
+        token: perm_data.oauth_token,
+        token_secret: perm_data.oauth_token_secret
+      };
+  })
+  // save oauth in session cookie
+  req.session.oauth = oauth;
+
+  // TODO: getting this from the cookie doesn't work yet
+  if(req.session.oauth.token == req.query.oauth_token)
+  {
+    // TODO: will also need to request their user id and send it with their oauth token
+    res.status(200).send()
+  }
+  else 
+  {
+    res.status(403).send("Must log in using /api/authenticate")
+  }
 });
 
 module.exports = router;
