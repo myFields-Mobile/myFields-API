@@ -71,8 +71,8 @@ router.get('/callback', (req, res) => {
 
     // authorize token
     request.get({url:host+token_path, oauth:oauth}, function (e, r, body) {
-      var perm_data = qs.parse(body),
-        oauth =
+        var perm_data = qs.parse(body);
+        var oauth =
         {
           consumer_key: oauth_consumer_key,
           consumer_secret: oauth_consumer_secret,
@@ -81,7 +81,6 @@ router.get('/callback', (req, res) => {
         };
         if(!oauth.token)
         {
-          
           res.status(403).send("Must log in using /api/authenticate")
         }
         else 
