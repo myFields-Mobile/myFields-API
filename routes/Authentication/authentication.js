@@ -36,13 +36,17 @@ router.get('/', (req, res) => {
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
   //       developer, remove the rejectUnauthorized flag
   // TODO: this may need to be changed to request.post if the myFields API endpoint changes
+
   // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
+    console.log("body: " + body)
     // Parse response to retrieve token
     var req_data = qs.parse(body)
+    console.log("req_data: " + req_data)
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+    console.log("redirecting")
     res.redirect(uri);
   })
 });
