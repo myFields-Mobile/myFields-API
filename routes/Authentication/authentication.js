@@ -17,6 +17,12 @@ var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 
+var oauth = {
+  callback: '/callback',
+  consumer_key: oauth_consumer_key,
+  consumer_secret:  oauth_consumer_secret
+}
+
 /**
  * @api {post} api/authenticate Request authentication token.
  * @apiName Authenticate
@@ -26,11 +32,6 @@ var authorize_path= '/oauth/authorize/';
  */
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
-  var oauth = {
-    callback: '/callback',
-    consumer_key: oauth_consumer_key,
-    consumer_secret:  oauth_consumer_secret
-  }
 
   // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
