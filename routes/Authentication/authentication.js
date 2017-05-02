@@ -58,7 +58,11 @@ router.get('/', (req, res) => {
 */
 router.get('/callback', (req, res, body) => {
   // consumer key and secret authorized
-  console.log(body)
+  console.log(qs.parse(body))
+  Object.keys(req.query).forEach(function(key)
+  {
+    console.log(key, req.query[key])
+  })
   var auth_data = qs.parse(body),
       oauth =
       {
