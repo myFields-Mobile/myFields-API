@@ -44,34 +44,6 @@ router.get('/', (req, res) => {
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
-
-    // consumer key and secret authorized
-	  var auth_data = qs.parse(body),
-        oauth =
-        {
-        	consumer_key: oauth_consumer_key,
-        	consumer_secret: oauth_consumer_secret,
-        	token: auth_data.oauth_token,
-        	token_secret: req_data.oauth_token_secret,
-        	verifier: auth_data.oauth_verifier
-        },
-        url = host + token_path;
-
-    // authorize token
-		request.get({url:url, oauth:oauth}, function (e, r, body) {
-			var perm_data = qs.parse(body),
-        oauth =
-				{
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: perm_data.oauth_token,
-          token_secret: perm_data.oauth_token_secret
-				};
-	  })
-    // save oauth in session cookie
-    req.session.oauth = oauth;
-    console.log("cookie set: " + req.session.oauth.token);
-	})
 });
 
 /**
@@ -82,14 +54,36 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  console.log("cookie: " + req.session);
-  console.log("cookie val: " + req.session.oauth);
-  console.log("cookie val token: " + req.session.oauth.token);
+// consumer key and secret authorized
+    var auth_data = qs.parse(body),
+        oauth =
+        {
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: auth_data.oauth_token,
+          token_secret: req_data.oauth_token_secret,
+          verifier: auth_data.oauth_verifier
+        },
+        url = host + token_path;
+
+    // authorize token
+    request.get({url:url, oauth:oauth}, function (e, r, body) {
+      var perm_data = qs.parse(body),
+        oauth =
+        {
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: perm_data.oauth_token,
+          token_secret: perm_data.oauth_token_secret
+        };
+    })
+  })
   // TODO: getting this from the cookie doesn't work yet
-  if(req.session.oauth.token == req.query.oauth_token)
+  if(oauth.token == req.query.oauth_token)
   {
+    req.session.oauth = oauth;
     // TODO: will also need to request their user id and send it with their oauth token
-    res.status(200).send()
+    res.status(200).send("Success")
   }
   else 
   {
