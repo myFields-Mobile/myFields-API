@@ -65,7 +65,7 @@ router.get('/callback', (req, res, body) => {
     Object.keys(perm_data).forEach(function(key)
     {
       console.log(key, perm_data[key])
-    }
+    })
     var oauth =
       {
         consumer_key: oauth_consumer_key,
