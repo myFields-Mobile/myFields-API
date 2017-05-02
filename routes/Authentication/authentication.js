@@ -41,9 +41,24 @@ router.get('/', (req, res) => {
   {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
-	  // Redirect user to authorize uri
+	  
+    // consumer key and secret authorized
+	  var auth_data = qs.parse(body),
+        oauth =
+        {
+        	consumer_key: oauth_consumer_key,
+        	consumer_secret: oauth_consumer_secret,
+        	token: auth_data.oauth_token,
+        	token_secret: req_data.oauth_token_secret,
+        	verifier: auth_data.oauth_verifier
+        },
+        url = host + token_path;
+
+    // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
+
+	})
 });
 
 /**
@@ -53,18 +68,7 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res, body) => {
-// consumer key and secret authorized
-    var auth_data = qs.parse(body),
-        oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: auth_data.oauth_token,
-          token_secret: req_data.oauth_token_secret,
-          verifier: auth_data.oauth_verifier
-        },
-        url = host + token_path;
+router.get('/callback', (req, res) => {
 
     // authorize token
     request.get({url:url, oauth:oauth}, function (e, r, body) {
@@ -76,20 +80,18 @@ router.get('/callback', (req, res, body) => {
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret
         };
-      // TODO: getting this from the cookie doesn't work yet
-      if(oauth.token == req.query.oauth_token)
-      {
-        req.session.oauth = oauth;
-        // TODO: will also need to request their user id and send it with their oauth token
-        res.status(200).send("Success")
-      }
-      else 
-      {
-        res.status(403).send("Must log in using /api/authenticate")
-      }
+        if(!oauth.token)
+        {
+          
+          res.status(403).send("Must log in using /api/authenticate")
+        }
+        else 
+        {
+          // TODO: will also need to request their user id and send it with their oauth token
+          // TODO: store in a cookie
+          res.status(200).send("Success")
+        }
     })
-  })
-  
 });
 
 module.exports = router;
