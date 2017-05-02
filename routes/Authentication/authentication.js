@@ -51,9 +51,7 @@ router.get('/', (req, res) => {
         	token: auth_data.oauth_token,
         	token_secret: req_data.oauth_token_secret,
         	verifier: auth_data.oauth_verifier
-        },
-        url = host + token_path;
-
+        };
     // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
@@ -71,7 +69,7 @@ router.get('/', (req, res) => {
 router.get('/callback', (req, res) => {
 
     // authorize token
-    request.get({url:url, oauth:oauth}, function (e, r, body) {
+    request.get({url:host+token_path, oauth:oauth}, function (e, r, body) {
       var perm_data = qs.parse(body),
         oauth =
         {
