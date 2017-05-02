@@ -40,43 +40,11 @@ router.get('/', (req, res) => {
   // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
-    // Parse response to retrieve token
+    // Parse body to retrieve oauth_token and oauth_token_secret
     var req_data = qs.parse(body)
-    Object.keys(req_data).forEach(function(key)
-    {
-      console.log("Line 47", key, req_data[key])
-    })
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
-
-    // consumer key and secret authorized
-    var auth_data = qs.parse(body);
-    Object.keys(auth_data).forEach(function(key)
-    {
-      console.log("Line 57", key, auth_data[key])
-    })
-    var oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: auth_data.oauth_token,
-          token_secret: auth_data.oauth_token_secret,
-          verifier: auth_data.oauth_verifier
-        };
-    var url = host + token_path;
-
-    // authorize token
-    request.get({url:url, oauth:oauth}, function (e, r, body) {
-      var perm_data = qs.parse(body);
-      var oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: perm_data.oauth_token,
-          token_secret: perm_data.oauth_token_secret
-        };
-    })
   })
 });
 
@@ -87,8 +55,26 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res) => {
-  
+router.get('/callback', (req, res, body) => {
+  // consumer key and secret authorized
+  var url = host + token_path;
+
+  // authorize token
+  request.get({url:url, oauth:oauth}, function (e, r, body) {
+    var perm_data = qs.parse(body);
+    Object.keys(perm_data).forEach(function(key)
+    {
+      console.log(key, perm_data[key])
+    }
+    var oauth =
+      {
+        consumer_key: oauth_consumer_key,
+        consumer_secret: oauth_consumer_secret,
+        token: perm_data.oauth_token,
+        token_secret: perm_data.oauth_token_secret
+      };
+  })
+
   // save oauth in session cookie
   req.session.oauth = oauth;
 
