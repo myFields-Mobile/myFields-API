@@ -39,6 +39,8 @@ router.get('/', (req, res) => {
   // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
+    console.log("cookie: " + req.session);
+    console.log("cookie val: " + req.session.oauth);
     // Parse response to retrieve token
     var req_data = qs.parse(body)
 	  // Redirect user to authorize uri
