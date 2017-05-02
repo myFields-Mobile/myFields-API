@@ -42,10 +42,10 @@ router.get('/', (req, res) => {
   {
     // Parse response to retrieve token
     var req_data = qs.parse(body)
-    Object.keys(req_data).forEach(function(key))
+    Object.keys(req_data).forEach(function(key)
     {
       console.log("in / ", key, req_data[key])
-    }
+    })
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     console.log("redirecting")
