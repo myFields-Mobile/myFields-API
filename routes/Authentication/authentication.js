@@ -43,7 +43,6 @@ router.get('/', (req, res) => {
     console.log("body: " + body)
     // Parse response to retrieve token
     var req_data = qs.parse(body)
-    console.log("req_data: " + req_data)
 	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     console.log("redirecting")
@@ -60,6 +59,8 @@ router.get('/', (req, res) => {
 */
 router.get('/callback', (req, res, body) => {
   // consumer key and secret authorized
+  console.log(body)
+  console.log(req.query)
   var auth_data = qs.parse(body),
       oauth =
       {
