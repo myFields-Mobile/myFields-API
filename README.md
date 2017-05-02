@@ -2,7 +2,8 @@
 
 A node.js and express based API for authentication and data control of all Kansas State 
 Research and Extension applications. This API is designed to be a general purpose API 
-for any myFields application.
+for any myFields application. For information about myFields itself, see the myFields
+section of this readme, at the bottom.
 
 The myFields team uses Microsoft Azure for this project. Contact Brian McCornack
 (mccornac AT ksu.edu) for access.
@@ -13,6 +14,14 @@ resolved, all of the signed requests that are currently using JsonWebToken will 
 to be modified to use Oauth.
 
 ## Usage Model:
+
+You can find brief instructions on setting up an environment to run this API in
+the documentation folder, in EnvironmentSetup.txt. During the setup, several SQL 
+tables will be created. The important tables are the App and AppData table. The
+App table will be used to register applications using the API, and the AppData
+table will be used to store information submitted by an application. You can see
+more details about the database schema in the models folder. Note that some tables
+were created by a previous team and may not be used.
 
 	0. Before using the application, an entry for the app should be created in the App 
 		table. This table wil store the app's name, which must be unique, and if the app
@@ -40,8 +49,6 @@ Detailed documentation on API methods can be found in the code, or you can view 
 opening documentation/index.html in your browser. This documentation is auto-generated
 from documentation in the code using APIdocs, and it can be updated by installing apidoc
 and running `apidoc -i /routes -o /documentation`.
-You can also find brief instructions on setting up an environment to run this API in
-the documentation folder.
 
 ## Testing:
 
@@ -70,3 +77,10 @@ the ability to upload data from this API to the myFields database.
 * Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
 * Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
 * Multiparty (Used for image uploading): https://www.npmjs.com/package/multiparty
+* Client-Sessions: https://github.com/mozilla/node-client-sessions
+
+## myFields
+
+The myFields program is being developed as a multi-disciplinary, online approach to Extension Agriculture that can be customized to a farmer's cropping system. This program is part of a Coordinated Extension Integrated Program primarily funded by the USDA, along with support from crop Commissions, other grants, and local organizations. Although Kansas State University is leading this effort, the myFields.info platform is designed for use by other collaborative states or regions. The existence of an online network for Extension personnel and their stakeholders will help reach new audiences and enhance the relevancy of Extension services in the era of online information.
+ 
+We offer Extension resources, interactive tools, and push technology to give our farmers the latest cropping information for decision-making. Our current projects include those that provide email alerts to users when pests have been detected near them by experts, help with pest management strategies such as chemical and varietal recommendations, and diagnostic tools for identifying and learning about crop pests. While site visitors can access Extension materials, users that create an account get access to pest sampling tools, customized field guides, and localized alerts for invasive pest species based on farmer interests.
