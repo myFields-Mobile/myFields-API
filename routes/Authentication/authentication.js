@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res) => {
+router.get('/callback', (req, res, body) => {
 // consumer key and secret authorized
     var auth_data = qs.parse(body),
         oauth =
