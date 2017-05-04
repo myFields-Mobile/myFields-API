@@ -24,11 +24,15 @@ var secrets = {};
  * @apiName Authenticate
  * @apiGroup Authentication
  *
- * @apiSuccess redirected to callback
+ * @apiSuccess {String} message A welcome message to the api.
+ * @apiSuccess {String} oauth The Oauth object containing the tokens used to sign requests
  */
 router.get('/', (req, res) => {
   // Tutorial used is here: https://www.npmjs.com/package/request#oauth-signing
   var oauth = {
+    // TODO: this callback is not yet working, we are working with
+    // the myFields developer to configure the Oauth endpoint
+    // correctly on his end
     callback: '/callback',
     consumer_key: oauth_consumer_key,
     consumer_secret:  oauth_consumer_secret
@@ -38,53 +42,63 @@ router.get('/', (req, res) => {
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
   //       developer, remove the rejectUnauthorized flag
   // TODO: this may need to be changed to request.post if the myFields API endpoint changes
-
   // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
-    // Parse body to retrieve oauth_token and oauth_token_secret
+    // Parse response to retrieve token
     var req_data = qs.parse(body)
-    // Store token secret in dictionary
-    secrets[req_data.oauth_token] = req_data.oauth_token_secret;
-	  // Redirect user to authorize uri
+    Object.keys(req_data).forEach(function(key)
+    {
+      console.log("52", key, req_data[key])
+    })
+    // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
+    console.log("57")
+    // After token is authorized
+    var auth_data = qs.parse(body);
+    Object.keys(auth_data).forEach(function(key)
+    {
+      console.log("62", key, auth_data[key])
+    })
+    var oauth =
+        {
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: auth_data.oauth_token,
+          token_secret: req_data.oauth_token_secret,
+          verifier: auth_data.oauth_verifier
+        };
+    var url = host + token_path;
+    
+    console.log("token authorized")
+
+    request.get({url:url, oauth:oauth}, function (e, r, body) {
+      // ready to make signed requests on behalf of the user
+      var perm_data = qs.parse(body);
+      Object.keys(perm_data).forEach(function(key)
+      {
+        console.log("81", key, perm_data[key])
+      })
+      var oauth =
+        {
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
+          token: perm_data.oauth_token,
+          token_secret: perm_data.oauth_token_secret
+        };
+      var url = host + "/node.json?";
+      console.log("line 77" + r)
+      console.log("line 78" + body)
+    })
   })
 });
 
-/**
-* @api {GET} api/authenticate/callback callback after oauth process is complete
-* @apiName Authenticate Callback
-* @apiGroup Authentication
-*
-* @apiSuccess {object} user_oauth signed in user's oauth credentials
-*/
 router.get('/callback', (req, res) => {
-  var auth_data = qs.parse(req.query)
-  var oauth =
-    { 
-      consumer_key: oauth_consumer_key,
-      consumer_secret: oauth_consumer_secret,
-      token: auth_data.oauth_token,
-      token_secret: secrets[auth_data.oauth_token],
-      //verifier: auth_data.oauth_verifier
-    }
-  var url = host + token_path;
-  request.post({url:url, oauth:oauth}, function (e, r, body) {
-    // ready to make signed requests on behalf of the user
-    var perm_data = qs.parse(body)
-    Object.keys(perm_data).forEach(function(key)
-    {
-      console.log("78", key, perm_data[key])
-    })
-    var oauth =
-      { 
-        consumer_key: oauth_consumer_key,
-        consumer_secret: oauth_consumer_secret,
-        token: perm_data.oauth_token,
-        token_secret: perm_data.oauth_token_secret,
-      }
-  })
+  console.log("Oauth callback")
+  //console.log(res.body)
+  res.send("Success")
 });
+
 
 module.exports = router;
