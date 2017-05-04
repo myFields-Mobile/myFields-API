@@ -59,15 +59,16 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res) => {
-  var token = qs.parse(req.query).oauth_token;
+router.get('/callback', (req, res, body) => {
+  console.log("63", body)
+  var auth_data = qs.parse(body)
   var oauth =
     { 
       consumer_key: oauth_consumer_key,
       consumer_secret: oauth_consumer_secret,
-      token: token,
-      token_secret: secrets[token]
-      //verifier: auth_data.oauth_verifier
+      token: auth_data.oauth_token,
+      token_secret: secrets[token],
+      verifier: auth_data.oauth_verifier
     }
   var url = host + token_path;
   request.get({url:url, oauth:oauth}, function (e, r, body) {
@@ -80,7 +81,7 @@ router.get('/callback', (req, res) => {
           consumer_key: oauth_consumer_key,
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
-          token_secret: perm_data.oauth_token_secret,
+          token_secret: secrets[token],
         }
   })
   // TODO: getting this from the cookie doesn't work yet
