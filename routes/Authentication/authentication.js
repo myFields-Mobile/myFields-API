@@ -84,7 +84,7 @@ router.get('/callback', (req, res) => {
         }
   })
   // TODO: getting this from the cookie doesn't work yet
-  if()
+  if(true)
   {
     // TODO: will also need to request their user id and send it with their oauth token
     res.status(200).send()
