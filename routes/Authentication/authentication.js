@@ -36,8 +36,7 @@ router.get('/', (req, res) => {
 
   // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
-  //       developer, remove the rejectUnauthorized flag
-  // TODO: this may need to be changed to request.post if the myFields API endpoint changes
+  //       developer, remove the rejectUnauthorized: false
 
   // requests a oauth token and token secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
@@ -57,26 +56,24 @@ router.get('/', (req, res) => {
 * @apiName Authenticate Callback
 * @apiGroup Authentication
 *
-* @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  console.log(req)
+  // parse response from redirect to retrieve oauth verifier
+  var auth_data = qs.parse(req.query);
   var oauth =
     { 
       consumer_key: oauth_consumer_key,
       consumer_secret: oauth_consumer_secret,
       token: auth_data.oauth_token,
       token_secret: secrets[auth_data.oauth_token],
-      //verifier: auth_data.oauth_verifier
+      // TODO: verifier is currently undefined - I believe this is an issue on the provider side
+      verifier: auth_data.oauth_verifier
     }
+  // final request to retrieve access token for logged in user
   var url = host + token_path;
   request.get({url:url, oauth:oauth}, function (e, r, body) {
     // ready to make signed requests on behalf of the user
     var perm_data = qs.parse(body)
-    Object.keys(perm_data).forEach(function(key)
-    {
-      console.log("78", key, perm_data[key])
-    })
     var oauth =
       { 
         consumer_key: oauth_consumer_key,
@@ -84,6 +81,8 @@ router.get('/callback', (req, res) => {
         token: perm_data.oauth_token,
         token_secret: perm_data.oauth_token_secret,
       }
+    // TODO: need to get logged in user's id and store this oauth object
+    // waiting for Oauth provider to expose an API endpoint for us to get this info
   })
 });
 
