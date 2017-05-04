@@ -69,7 +69,7 @@ router.get('/callback', (req, res) => {
       token_secret: secrets[token]
       //verifier: auth_data.oauth_verifier
     }
-  var url = host + access_token;
+  var url = host + token_path;
   request.get({url:url, oauth:oauth}, function (e, r, body) {
     // ready to make signed requests on behalf of the user 
     console.log("75", body)
@@ -77,8 +77,8 @@ router.get('/callback', (req, res) => {
     var perm_data = qs.parse(body)
     var oauth =
         { 
-          consumer_key: CONSUMER_KEY,
-          consumer_secret: CONSUMER_SECRET,
+          consumer_key: oauth_consumer_key,
+          consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
           token_secret: perm_data.oauth_token_secret,
         }
