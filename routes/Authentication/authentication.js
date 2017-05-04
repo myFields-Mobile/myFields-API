@@ -16,6 +16,8 @@ var host = 'https://svcs.ext.solotandem.com:32768';
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
+// Dictionary for temporarily storing tokens and token secrets for Oauth signing
+var secrets = {};
 
 /**
  * @api {post} api/authenticate Request authentication token.
@@ -46,9 +48,10 @@ router.get('/', (req, res) => {
     {
       console.log(key, req_data[key])
     })
-
+    // Store token secret in dictionary
+    secrets[req_data.oauth_token] = req_data.oauth_token_secret;
 	  // Redirect user to authorize uri
-    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token, oauth_token_secret: req_data: oauth_token})
+    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
     res.redirect(uri);
   })
 });
@@ -61,11 +64,31 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res, body) => {
-
-
-  // save oauth in session cookie
-  req.session.oauth = oauth;
-
+  request.post({url:url, oauth:oauth}, function (e, r, body) {
+  console.log("68", r.query)
+  console.log("69", r.body)
+  var auth_data = qs.parse(body)
+  var oauth =
+    { 
+      consumer_key: oauth_consumer_key,
+      consumer_secret: oauth_token_secret,
+      token: auth_data.oauth_token,
+      token_secret: secrets[auth_data.oauth_token],
+      verifier: auth_data.oauth_verifier
+    }
+  var url = host + access_token;
+  request.get({url:url, oauth:oauth}, function (e, r, body) {
+  console.log("81", r.query)
+  console.log("82", r.body)
+  // ready to make signed requests on behalf of the user 
+  var perm_data = qs.parse(body)
+  var oauth =
+    { 
+      consumer_key: oauth_consumer_key,
+      consumer_secret: oauth_token_secret,
+      token: perm_data.oauth_token,
+      token_secret: perm_data.oauth_token_secret,
+    }
   // TODO: getting this from the cookie doesn't work yet
   if(req.session.oauth.token == req.query.oauth_token)
   {
