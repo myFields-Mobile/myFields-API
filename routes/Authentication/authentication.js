@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
     })
 
 	  // Redirect user to authorize uri
-    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
+    var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token, oauth_token_secret: req_data: oauth_token})
     res.redirect(uri);
   })
 });
@@ -61,24 +61,7 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res, body) => {
-  // consumer key and secret authorized
-  var url = host + token_path;
 
-  // authorize token
-  request.get({url:url, oauth:oauth}, function (e, r, body) {
-    var perm_data = qs.parse(req.query);
-    Object.keys(perm_data).forEach(function(key)
-    {
-      console.log(key, perm_data[key])
-    })
-    var oauth =
-      {
-        consumer_key: oauth_consumer_key,
-        consumer_secret: oauth_consumer_secret,
-        token: perm_data.oauth_token,
-        token_secret: perm_data.oauth_token_secret
-      };
-  })
 
   // save oauth in session cookie
   req.session.oauth = oauth;
