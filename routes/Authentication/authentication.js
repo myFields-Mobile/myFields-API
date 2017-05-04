@@ -67,7 +67,7 @@ router.get('/callback', (req, res, body) => {
       consumer_key: oauth_consumer_key,
       consumer_secret: oauth_consumer_secret,
       token: auth_data.oauth_token,
-      token_secret: secrets[token],
+      token_secret: secrets[auth_data.oauth_token],
       verifier: auth_data.oauth_verifier
     }
   var url = host + token_path;
