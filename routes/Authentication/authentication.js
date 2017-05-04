@@ -59,7 +59,7 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res,x, y) => {
+router.get('/callback', (req, res, x, y) => {
   console.log("63", req)
   console.log("64", res)
   console.log("65", x)
