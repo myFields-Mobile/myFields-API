@@ -81,7 +81,7 @@ router.get('/callback', (req, res) => {
           consumer_key: oauth_consumer_key,
           consumer_secret: oauth_consumer_secret,
           token: perm_data.oauth_token,
-          token_secret: secrets[token],
+          token_secret: secrets[perm_data.oauth_token],
         }
   })
   // TODO: getting this from the cookie doesn't work yet
