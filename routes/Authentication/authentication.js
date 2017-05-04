@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
     var req_data = qs.parse(body)
     Object.keys(req_data).forEach(function(key)
     {
-      console.log(key, req_data[key])
+      console.log("49", key, req_data[key])
     })
     // Store token secret in dictionary
     secrets[req_data.oauth_token] = req_data.oauth_token_secret;
@@ -64,9 +64,9 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res, body) => {
-  request.post({url:url, oauth:oauth}, function (e, r, body) {
-  console.log("68", r.query)
-  console.log("69", r.body)
+  console.log("68", req.query)
+  console.log("69", req.body)
+  console.log("70", body)
   var auth_data = qs.parse(body)
   var oauth =
     { 
@@ -77,18 +77,6 @@ router.get('/callback', (req, res, body) => {
       verifier: auth_data.oauth_verifier
     }
   var url = host + access_token;
-  request.get({url:url, oauth:oauth}, function (e, r, body) {
-  console.log("81", r.query)
-  console.log("82", r.body)
-  // ready to make signed requests on behalf of the user 
-  var perm_data = qs.parse(body)
-  var oauth =
-    { 
-      consumer_key: oauth_consumer_key,
-      consumer_secret: oauth_token_secret,
-      token: perm_data.oauth_token,
-      token_secret: perm_data.oauth_token_secret,
-    }
   // TODO: getting this from the cookie doesn't work yet
   if(req.session.oauth.token == req.query.oauth_token)
   {
