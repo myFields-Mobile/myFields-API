@@ -85,16 +85,6 @@ router.get('/callback', (req, res) => {
         token_secret: perm_data.oauth_token_secret,
       }
   })
-  // TODO: getting this from the cookie doesn't work yet
-  if(false)
-  {
-    // TODO: will also need to request their user id and send it with their oauth token
-    res.status(200).send()
-  }
-  else 
-  {
-    res.status(403).send("Must log in using /api/authenticate")
-  }
 });
 
 module.exports = router;
