@@ -66,7 +66,7 @@ router.get('/callback', (req, res, body) => {
 
   // authorize token
   request.get({url:url, oauth:oauth}, function (e, r, body) {
-    var perm_data = qs.parse(body);
+    var perm_data = qs.parse(req.query);
     Object.keys(perm_data).forEach(function(key)
     {
       console.log(key, perm_data[key])
