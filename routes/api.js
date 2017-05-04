@@ -20,6 +20,7 @@ var inspectionRoutes = require('./Inspection/inspection');
 var adminRoutes = require('./Admin/admin');
 var appRoutes = require('./App/app');
 var appdataRoutes = require('./AppData/appdata');
+var imageRoutes = require('./Images/images');
 
 /**
  * API Routes
@@ -35,6 +36,7 @@ router.use('/inspection', inspectionRoutes);
 router.use('/admin', adminRoutes);
 router.use('/app', appRoutes);
 router.use('/appdata', appdataRoutes);
+router.use('/images', imageRoutes);
 /**
  * End API Routes
  */
