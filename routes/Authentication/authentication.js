@@ -59,9 +59,9 @@ router.get('/', (req, res) => {
 *
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
-router.get('/callback', (req, res, body) => {
-  console.log("63", body)
-  var auth_data = qs.parse(body)
+router.get('/callback', (req, res) => {
+  console.log("63", req.body)
+  var auth_data = qs.parse(req.body)
   var oauth =
     { 
       consumer_key: oauth_consumer_key,
@@ -74,7 +74,7 @@ router.get('/callback', (req, res, body) => {
   request.get({url:url, oauth:oauth}, function (e, r, body) {
     // ready to make signed requests on behalf of the user 
     console.log("75", body)
-    console.log("76", r.query)
+    console.log("76", r)
     var perm_data = qs.parse(body)
     var oauth =
         { 
