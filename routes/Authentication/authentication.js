@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  console.log(JSON.stringify(req.headers))
+  console.log(req)
   var oauth =
     { 
       consumer_key: oauth_consumer_key,
