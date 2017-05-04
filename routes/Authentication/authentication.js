@@ -34,54 +34,21 @@ router.get('/', (req, res) => {
     consumer_secret:  oauth_consumer_secret
   }
 
-    // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
+  // TODO: This rejectUnauthorized: false flag is insecure - the myFields API endpoint
   //       needs to get a valid certificate. Once a new certificate is acquired by the myFields 
   //       developer, remove the rejectUnauthorized flag
   // TODO: this may need to be changed to request.post if the myFields API endpoint changes
+
   // makes an http request to authorize the oauth key and secret
   request.get({url:host+request_path, oauth:oauth, rejectUnauthorized: false}, function(err, response, body)
   {
-    // Parse response to retrieve token
+    // Parse body to retrieve oauth_token and oauth_token_secret
     var req_data = qs.parse(body)
-    // Redirect user to authorize uri
+    // Store token secret in dictionary
+    secrets[req_data.oauth_token] = req_data.oauth_token_secret;
+	  // Redirect user to authorize uri
     var uri = host + authorize_path + '?' + qs.stringify({oauth_token: req_data.oauth_token})
-    console.log("48")
     res.redirect(uri);
-    console.log("50")
-    // consumer key and secret authorized
-    var auth_data = qs.parse(body),
-        oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: auth_data.oauth_token,
-          token_secret: req_data.oauth_token_secret,
-          verifier: auth_data.oauth_verifier
-        },
-        url = host + token_path;
-    Object.keys(auth_data).forEach(function(key)
-    {
-      console.log("64", key, auth_data[key])
-    })
-    // authorize token
-    request.get({url:url, oauth:oauth}, function (e, r, body) {
-      var perm_data = qs.parse(body);
-      Object.keys(perm_data).forEach(function(key)
-        {
-          console.log("71", key, perm_data[key])
-        })
-      var oauth =
-        {
-          consumer_key: oauth_consumer_key,
-          consumer_secret: oauth_consumer_secret,
-          token: perm_data.oauth_token,
-          token_secret: perm_data.oauth_token_secret
-        };
-      Object.keys(oauth).forEach(function(key)
-      {
-        console.log("71", key, oauth[key])
-      })
-    })
   })
 });
 
@@ -93,6 +60,41 @@ router.get('/', (req, res) => {
 * @apiSuccess {object} user_oauth signed in user's oauth credentials
 */
 router.get('/callback', (req, res) => {
-  console.log("callback")
+  var auth_data = qs.parse(req.query)
+  var oauth =
+    { 
+      consumer_key: oauth_consumer_key,
+      consumer_secret: oauth_consumer_secret,
+      token: auth_data.oauth_token,
+      token_secret: secrets[auth_data.oauth_token],
+      //verifier: auth_data.oauth_verifier
+    }
+  var url = host + token_path;
+  request.post({url:url, oauth:oauth}, function (e, r, body) {
+    // ready to make signed requests on behalf of the user
+    var perm_data = qs.parse(body)
+    Object.keys(perm_data).forEach(function(key)
+    {
+      console.log("78", key, perm_data[key])
+    })
+    var oauth =
+      { 
+        consumer_key: oauth_consumer_key,
+        consumer_secret: oauth_consumer_secret,
+        token: perm_data.oauth_token,
+        token_secret: perm_data.oauth_token_secret,
+      }
+  })
+  // TODO: getting this from the cookie doesn't work yet
+  if(false)
+  {
+    // TODO: will also need to request their user id and send it with their oauth token
+    res.status(200).send()
+  }
+  else 
+  {
+    res.status(403).send("Must log in using /api/authenticate")
+  }
 });
+
 module.exports = router;
