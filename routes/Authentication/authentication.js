@@ -6,18 +6,19 @@ var router = express.Router({mergeParams:true});
 
 'use strict';
 
-// Note the oauth consumer key and secret must be provided here
-// or set as environment variables
+// Consumer key and consumer secret must be set as environment
+// variables before using the API
 const oauth_consumer_key = process.env.OAUTH_KEY;
 const oauth_consumer_secret = process.env.OAUTH_SECRET;
 
 // TODO: this is a non-production endpoint and will need to be changed when the app is ready for production
-var host = 'https://svcs.ext.solotandem.com:32768';
+var host = process.env.OAUTH_HOST;
 var request_path = '/oauth/request_token/';
 var token_path = '/oauth/access_token/';
 var authorize_path= '/oauth/authorize/';
 // Dictionary for temporarily storing tokens and token secrets for Oauth signing
 var secrets = {};
+var user_oauth = {};
 
 /**
  * @api {post} api/authenticate Request authentication token.
@@ -66,7 +67,7 @@ router.get('/callback', (req, res) => {
       consumer_secret: oauth_consumer_secret,
       token: auth_data.oauth_token,
       token_secret: secrets[auth_data.oauth_token],
-      // TODO: verifier is currently undefined - I believe this is an issue on the provider side
+      // TODO: verifier is currently undefined - this is an issue on the provider side
       verifier: auth_data.oauth_verifier
     }
   // final request to retrieve access token for logged in user
@@ -82,6 +83,9 @@ router.get('/callback', (req, res) => {
         token_secret: perm_data.oauth_token_secret,
       }
     // TODO: need to get logged in user's id and store this oauth object
+    // as shown in the comments below
+    // var user_id = <some way of getting the user's id>;
+    // user_oauth[user_id] = oauth;
     // waiting for Oauth provider to expose an API endpoint for us to get this info
   })
 });
