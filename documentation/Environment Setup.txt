@@ -6,9 +6,7 @@ to run:
 	AZURE_STORAGE_ACCESS_KEY: private key for Azure Storage
 
 	OAUTH_KEY: identifier for myFields.info authentication
-		contact the myFields.info developer for this information
 	OATH_SECRET: private key for myFields.info authentication
-		contact the myFields.info developer for this information
 
 After installing all dependencies, the API can be started using
 'npm start' with elevated privileges.
