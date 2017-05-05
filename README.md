@@ -15,7 +15,7 @@ resolved, all of the signed requests that are currently using JsonWebToken will 
 to be modified to use Oauth. **Currently, the master branch is usable, but the authentication
 is not using Oauth and thus will not interact with myFields.info. The dev-master branch
 contains the Oauth implementation, but it is not completely functional.** See the continuing 
-work section and the in-code comments for details.**
+work section and the in-code comments for details.
 
 ## Usage Model:
 
