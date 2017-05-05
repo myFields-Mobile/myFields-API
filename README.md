@@ -8,10 +8,14 @@ section of this readme, at the bottom.
 The myFields team uses Microsoft Azure for this project. Contact Brian McCornack
 (mccornac AT ksu.edu) for access.
 
-**PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE.**
+**PLEASE NOTE THIS API IS UNDER ACTIVE DEVELOPMENT AND IS NOT YET READY FOR GENERAL USE. 
+FOR CONTINUING DEVELOPMENT, PLEASE SEE THE DEV-MASTER BRANCH.**
 We are currently resolving issues with the Oauth authentication. Once these issues are
 resolved, all of the signed requests that are currently using JsonWebToken will need
-to be modified to use Oauth.
+to be modified to use Oauth. **Currently, the master branch is usable, but the authentication
+is not using Oauth and thus will not interact with myFields.info. The dev-master branch
+contains the Oauth implementation, but it is not completely functional.** See the continuing 
+work section and the in-code comments for details.**
 
 ## Usage Model:
 
@@ -64,22 +68,26 @@ authentication is not complete.
 
 First priority should be completing authentication. At this time, we believe our authentication
 code is correct, but there is an issue with the configuration of the myFields.info Oauth provider.
-We are currently working to fix these issues.
+See comments in routes/Authentication/authentication.js for details.
 
 Once the Oauth works correctly, we should replace all usages of the JSONWebToken with the Oauth
 token and secret, and replace all usages of the authentication middleware with calls to the
 myFields.info API.
 
-Other than authentication, the API is currently usable. Further improvement should include
-the ability to upload data from this API to the myFields database.
+Once authentication is completely done, the next step will be to implement uploading
+data from this database to the myFields.info database using the myFields.info API.
+
+Finally, once the API is ready to be moved to production, you will need to contact
+the myFields.info developer and get a production endpoint and oauth credentials.
 
 ## Reference Links:
 * Azure Blob Storage Documentation: https://docs.microsoft.com/en-us/azure/storage/storage-nodejs-how-to-use-blob-storage
 * Request Library Oauth Process: https://www.npmjs.com/package/request#oauth-signing
+* Oauth 1a Standard: https://oauth.net/core/1.0a/
 * Multiparty (Used for image uploading): https://www.npmjs.com/package/multiparty
 
 ## myFields
 
 The myFields program is being developed as a multi-disciplinary, online approach to Extension Agriculture that can be customized to a farmer's cropping system. This program is part of a Coordinated Extension Integrated Program primarily funded by the USDA, along with support from crop Commissions, other grants, and local organizations. Although Kansas State University is leading this effort, the myFields.info platform is designed for use by other collaborative states or regions. The existence of an online network for Extension personnel and their stakeholders will help reach new audiences and enhance the relevancy of Extension services in the era of online information.
  
-We offer Extension resources, interactive tools, and push technology to give our farmers the latest cropping information for decision-making. Our current projects include those that provide email alerts to users when pests have been detected near them by experts, help with pest management strategies such as chemical and varietal recommendations, and diagnostic tools for identifying and learning about crop pests. While site visitors can access Extension materials, users that create an account get access to pest sampling tools, customized field guides, and localized alerts for invasive pest species based on farmer interests.
+We offer Extension resources, interactive tools, and push technology to give our farmers the latest cropping information for decision-making. Our current projects include those that provide email alerts to users when pests have been detected near them by experts, help with pest management strategies such as chemical and varietal recommendations, and diagnostic tools for identifying and learning about crop pests. While site visitors can access Extension materials, users that create an account get access to pest sampling tools, customized field guides, and localized alerts for invasive pest species based on farmer interests. those that provide email alerts to users when pests have been detected near them by experts, help with pest management strategies such as chemical and varietal recommendations, and diagnostic tools for identifying and learning about crop pests. While site visitors can access Extension materials, users that create an account get access to pest sampling tools, customized field guides, and localized alerts for invasive pest species based on farmer interests.
