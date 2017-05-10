@@ -66,8 +66,9 @@ authentication is not complete.
 ## Continuing Work:
 
 First priority should be completing authentication. At this time, we believe our authentication
-code is correct, but there is an issue with the configuration of the myFields.info Oauth provider.
-See comments in routes/Authentication/authentication.js for details.
+code is correct, but there was an issue with the configuration of the myFields.info Oauth provider.
+We believe the issue has been resolved, but we did not have an opportunity to test it before
+the end of the semester. See comments in routes/Authentication/authentication.js for details.
 
 Once the Oauth works correctly, we should replace all usages of the JSONWebToken with the Oauth
 token and secret, and replace all usages of the authentication middleware with calls to the
